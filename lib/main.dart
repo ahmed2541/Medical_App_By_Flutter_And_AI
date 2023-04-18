@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:medicalappsproject/diseases_screens/Broken_Leg_Page.dart';
-import 'package:medicalappsproject/modules/First_Page.dart';
+import 'package:medicalappsproject/screens/First_Page.dart';
 import 'package:medicalappsproject/login/Login_Page.dart';
-import 'package:medicalappsproject/modules/Second_Page.dart';
-import 'package:medicalappsproject/modules/Third_Page.dart';
+import 'package:medicalappsproject/screens/Second_Page.dart';
+import 'package:medicalappsproject/screens/Third_Page.dart';
 import 'package:medicalappsproject/home/home_screen.dart';
 import 'package:medicalappsproject/test/tesst.dart';
 

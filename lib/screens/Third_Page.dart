@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medicalappsproject/home/home.dart';
 import 'package:medicalappsproject/login/Login_Page.dart';
-import 'package:medicalappsproject/modules/Second_Page.dart';
+import 'package:medicalappsproject/screens/Second_Page.dart';
 import 'package:medicalappsproject/home/home_screen.dart';
 
 class ThirdPage extends StatelessWidget {

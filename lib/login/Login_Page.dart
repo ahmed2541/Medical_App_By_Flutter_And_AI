@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medicalappsproject/modules/Third_Page.dart';
+import 'package:medicalappsproject/screens/Third_Page.dart';
 import 'package:medicalappsproject/home/home_screen.dart';
 import 'package:medicalappsproject/shared/components/components.dart';
 
