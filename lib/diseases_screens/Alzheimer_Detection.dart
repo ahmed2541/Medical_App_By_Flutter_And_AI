@@ -48,11 +48,7 @@ class _AlzheimerDetectionState extends State<AlzheimerDetection> {
             size: 30,
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Home(),
-                ));
+            Navigator.pop(context);
           },
         ),
         title: const Center(

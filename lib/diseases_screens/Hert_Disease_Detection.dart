@@ -48,11 +48,7 @@ class _HertDiseaseDetectionState extends State<HertDiseaseDetection> {
             size: 30,
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Home(),
-                ));
+            Navigator.pop(context);
           },
         ),
         title: const Center(

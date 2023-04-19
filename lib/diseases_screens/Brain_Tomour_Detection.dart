@@ -46,11 +46,7 @@ final  Uri _uri = Uri.parse(
             size: 30,
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Home(),
-                ));
+            Navigator.pop(context);
           },
         ),
         title: const Center(

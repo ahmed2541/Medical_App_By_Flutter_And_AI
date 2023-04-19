@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:medicalappsproject/screens/Second_Page.dart';
-import 'package:medicalappsproject/screens/Third_Page.dart';
 import 'package:medicalappsproject/home/home_screen.dart';
-
+import 'package:medicalappsproject/screens/Second_Page.dart';
 import '../home/home.dart';
 
 class FirstPage extends StatelessWidget {
+  const FirstPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class FirstPage extends StatelessWidget {
               child: TextButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Home()));
+                        MaterialPageRoute(builder: (context) => const NewHome()));
                   },
                   child: const Text(
                     'Skip',
@@ -81,7 +81,7 @@ class FirstPage extends StatelessWidget {
                   mini: true,
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SecondPage()));
+                        MaterialPageRoute(builder: (context) => const SecondPage()));
                   },
                   child: const Icon(Icons.arrow_left,size: 40,),
                 ),

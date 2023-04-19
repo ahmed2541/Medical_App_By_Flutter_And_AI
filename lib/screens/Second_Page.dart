@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:medicalappsproject/screens/First_Page.dart';
-import 'package:medicalappsproject/modules/Third_Page.dart';
 import 'package:medicalappsproject/home/home_screen.dart';
-
 import '../home/home.dart';
+import 'Third_Page.dart';
 
 class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,9 +19,9 @@ class SecondPage extends StatelessWidget {
               child: TextButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Home()));
+                        MaterialPageRoute(builder: (context) => const NewHome()));
                   },
-                  child: Text(
+                  child: const Text(
                     'Skip',
                     style: TextStyle(fontSize: 22),
                   )),
@@ -33,16 +33,16 @@ class SecondPage extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 CircleAvatar(
                   radius: 25,
                   backgroundImage: AssetImage('asserts/medical5.jpg'),
                   backgroundColor: Colors.white,
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 10,
                 ),
-                const Text(
+                Text(
                   "Healthy App",
                   style: TextStyle(
                     fontSize: 40,
@@ -52,12 +52,12 @@ class SecondPage extends StatelessWidget {
                 ),
               ],
             ),
-            CircleAvatar(
+            const CircleAvatar(
               radius: 170,
               backgroundColor: Colors.white,
               backgroundImage: AssetImage("asserts/medical2.jpg"),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
@@ -72,7 +72,7 @@ class SecondPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -81,9 +81,9 @@ class SecondPage extends StatelessWidget {
                   mini: true,
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ThirdPage()));
+                        MaterialPageRoute(builder: (context) => const ThirdPage()));
                   },
-                  child: Icon(Icons.arrow_left,size: 40,),
+                  child: const Icon(Icons.arrow_left,size: 40,),
                 ),
                 // FloatingActionButton(
                 //   heroTag: 'page1agnin',
@@ -98,8 +98,8 @@ class SecondPage extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
+              children: const [
+                Text(
                   'Skip',
                   style: TextStyle(color: Colors.white),
                 )

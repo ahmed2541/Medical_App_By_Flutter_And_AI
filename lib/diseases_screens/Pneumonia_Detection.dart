@@ -48,11 +48,7 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
             size: 30,
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Home(),
-                ));
+            Navigator.pop(context);
           },
         ),
         title: const Center(

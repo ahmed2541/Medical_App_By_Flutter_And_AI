@@ -44,11 +44,7 @@ class _BrokenLegState extends State<BrokenLeg> {
             size: 30,
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Home(),
-                ));
+            Navigator.pop(context);
           },
         ),
         title: const Center(

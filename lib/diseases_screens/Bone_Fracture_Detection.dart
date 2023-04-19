@@ -46,11 +46,7 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
             size: 30,
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Home(),
-                ));
+            Navigator.pop(context);
           },
         ),
         title: const Center(
@@ -79,7 +75,7 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
                   ),
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
-                      image: AssetImage("asserts/arm+pain.jpeg"),
+                      image: AssetImage("asserts/2103214.jpg"),
                       fit: BoxFit.contain)),
             ),
             Padding(
