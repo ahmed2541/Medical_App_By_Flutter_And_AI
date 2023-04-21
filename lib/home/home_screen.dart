@@ -26,16 +26,19 @@ class _NewHomeState extends State<NewHome> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 3, 75, 111),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: IconButton(
-                enableFeedback: true,
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.search,
-                  color: Color.fromARGB(255, 69, 157, 230),
-                  size: 28,
-                )),
+          Padding(
+            padding: const EdgeInsets.only(right:10.0),
+            child: IconButton(
+              onPressed: () {},
+              icon: IconButton(
+                  enableFeedback: true,
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.search,
+                    color: Color.fromARGB(255, 69, 157, 230),
+                    size: 28,
+                  )),
+            ),
           )
         ],
       ),
@@ -100,7 +103,7 @@ class _NewHomeState extends State<NewHome> {
               textColor: Colors.black,
               iconColor: Colors.black,
               onTap: () {
-                                Navigator.push(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => SettingPage(),

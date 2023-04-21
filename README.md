@@ -1,20 +1,11 @@
 # medicalappsproject
 
-A new Flutter project.
+Medical Application with Flutter and Ai
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Medicine field one of the most important science in our life and what about if we mix it with engineering ?, this is our plan that we designed the app, medical application deployed in flutter to give the application artificial mentality to diagnose multiple diseases with out human interaction and with high accuracy over humans using deep leaning and computer vision techniques.
 
 Refrences:
-    - Broken leg : https://www.mayoclinic.org/diseases-conditions/broken-leg/symptoms-causes/syc-20370412
     - Bone Fracture : https://www.pennmedicine.org/for-patients-and-visitors/patient-information/conditions-treated-a-to-z/bone-fractures
+    - Brain Tomour : https://www.mayoclinic.org/diseases-conditions/brain-tumor/symptoms-causes/syc-20350084

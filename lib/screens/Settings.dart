@@ -13,8 +13,56 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(),
+      appBar: AppBar(
+        title: Text("Setting",style: TextStyle(fontSize: 22),),
+      ),
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(
+                Icons.text_snippet_outlined,
+                size: 29,
+                color: Color.fromARGB(255, 176, 84, 84),
+              ),
+              title: Text(
+                "Refrences",
+                style: TextStyle(fontSize: 25, color: Colors.blue),
+              ),
+              onTap: () {},
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 8.0),
+              child: Divider(
+                height: 15,
+                thickness: 1,
+                color: Colors.grey[400],
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.language,
+                size: 29,
+                color: Colors.redAccent,
+              ),
+              title: Text(
+                "Language",
+                style: TextStyle(fontSize: 25, color: Colors.blue),
+              ),
+              onTap: () {},
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 8.0),
+              child: Divider(
+                height: 15,
+                thickness: 1,
+                color: Colors.grey[400],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

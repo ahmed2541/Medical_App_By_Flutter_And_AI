@@ -69,9 +69,9 @@ class _AboutUsState extends State<AboutUs> {
                           backgroundColor: Color.fromARGB(155, 1, 28, 51),
                           radius: 30,
                           child: Text(
-                            "1",
+                            "Eng",
                             style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold),
+                                fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const SizedBox(
@@ -106,9 +106,9 @@ class _AboutUsState extends State<AboutUs> {
                           backgroundColor: Color.fromARGB(155, 1, 28, 51),
                           radius: 30,
                           child: Text(
-                            "2",
+                            "Eng",
                             style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold),
+                                fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const SizedBox(
@@ -143,9 +143,9 @@ class _AboutUsState extends State<AboutUs> {
                           backgroundColor: Color.fromARGB(155, 1, 28, 51),
                           radius: 30,
                           child: Text(
-                            "3",
+                            "Eng",
                             style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold),
+                                fontSize: 25, fontWeight: FontWeight.bold),
                           ),
                         ),
                         const SizedBox(
@@ -220,9 +220,9 @@ class _AboutUsState extends State<AboutUs> {
                       height: 15,
                     ),
                     Padding(
-                      padding: EdgeInsets.all(5.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'Our application will help many people, whether patients or doctors!',
+                        'Our application will help many people, whether patients or doctors.',
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -230,9 +230,9 @@ class _AboutUsState extends State<AboutUs> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(5.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'Medicine field one of the most important science in our life and what about if we mix it with engineering ?, this is our plan that we designed the app, medical application deployed in flutter to give the application artificial mentality to diagnose multiple diseases with out human interaction and with high accuracy over humans using deep leaning and computer vision techniques',
+                        'Medicine field one of the most important science in our life and what about if we mix it with engineering ?, this is our plan that we designed the app, medical application deployed in flutter to give the application artificial mentality to diagnose multiple diseases with out human interaction and with high accuracy over humans using deep leaning and computer vision techniques.',
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,

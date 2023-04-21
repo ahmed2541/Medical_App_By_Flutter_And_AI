@@ -773,7 +773,7 @@ final  Uri _uri = Uri.parse(
                     child: Container(
                         alignment: AlignmentDirectional.topStart,
                         height: 320,
-                        width: double.infinity,
+                        width: 300,
                         decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(
@@ -921,12 +921,12 @@ final  Uri _uri = Uri.parse(
                     child: Container(
                         alignment: AlignmentDirectional.topStart,
                         height: 330,
-                        width: double.infinity,
+                        width: 300,
                         decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(
                                     'asserts/brain-metastases-8col.jpg'),
-                                fit: BoxFit.fill)),
+                                fit: BoxFit.contain)),
                         child: const Align(
                           alignment: Alignment.topRight,
                           child: Text(
