@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../chat/chatBot.dart';
 import '../diseases_screens/Alzheimer_Detection.dart';
 import '../diseases_screens/Bone_Fracture_Detection.dart';
-import '../diseases_screens/Brain_Tomour_Detection.dart';
-import '../diseases_screens/Hert_Disease_Detection.dart';
+import '../diseases_screens/Brain_Tumor_Detection.dart';
+import '../diseases_screens/Heart_Disease_Detection.dart';
 import '../diseases_screens/Pneumonia_Detection.dart';
+import '../models/model_home.dart';
 import '../screens/AboutUs.dart';
 import '../screens/Settings.dart';
+import '../shared/components/components.dart';
 
 class NewHome extends StatefulWidget {
   const NewHome({super.key});
@@ -27,12 +29,14 @@ class _NewHomeState extends State<NewHome> {
         backgroundColor: const Color.fromARGB(255, 3, 75, 111),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right:10.0),
+            padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
               onPressed: () {},
               icon: IconButton(
                   enableFeedback: true,
-                  onPressed: () {},
+                  onPressed: () {
+                    showSearch(context: context, delegate: DataSearch());
+                  },
                   icon: const Icon(
                     Icons.search,
                     color: Color.fromARGB(255, 69, 157, 230),
@@ -89,7 +93,7 @@ class _NewHomeState extends State<NewHome> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AboutUs(),
+                      builder: (context) => const AboutUs(),
                     ));
               },
             ),
@@ -106,7 +110,7 @@ class _NewHomeState extends State<NewHome> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SettingPage(),
+                      builder: (context) => const SettingPage(),
                     ));
               },
             ),
@@ -129,7 +133,7 @@ class _NewHomeState extends State<NewHome> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(3.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -144,13 +148,6 @@ class _NewHomeState extends State<NewHome> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.only(end: 100),
-                child: Divider(
-                  height: 15,
-                  color: Colors.grey[500],
                 ),
               ),
               const SizedBox(
@@ -246,13 +243,6 @@ class _NewHomeState extends State<NewHome> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.only(end: 100),
-                child: Divider(
-                  height: 15,
-                  color: Colors.grey[500],
-                ),
-              ),
               const SizedBox(
                 height: 8,
               ),
@@ -290,7 +280,7 @@ class _NewHomeState extends State<NewHome> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const BrainTomourDetection(),
+                                                    const BrainTumorDetection(),
                                               ));
                                         },
                                         child: Container(
@@ -317,7 +307,7 @@ class _NewHomeState extends State<NewHome> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const BrainTomourDetection(),
+                                              const BrainTumorDetection(),
                                         ));
                                   },
                                   child: Padding(
@@ -328,7 +318,7 @@ class _NewHomeState extends State<NewHome> {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.start,
-                                          "Brain Tomour Detection",
+                                          "Brain Tumor Detection",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Colors.white),
@@ -343,6 +333,8 @@ class _NewHomeState extends State<NewHome> {
                               width: 15,
                             ),
                             Container(
+                              height: 320,
+                              width: 250,
                               decoration: BoxDecoration(
                                   color:
                                       const Color.fromARGB(255, 21, 139, 172),
@@ -437,13 +429,6 @@ class _NewHomeState extends State<NewHome> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.only(end: 65),
-                child: Divider(
-                  height: 15,
-                  color: Colors.grey[500],
-                ),
-              ),
               const SizedBox(
                 height: 8,
               ),
@@ -482,7 +467,7 @@ class _NewHomeState extends State<NewHome> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const HertDiseaseDetection(),
+                                                    const HeartDiseaseDetection(),
                                               ));
                                         },
                                         child: Container(
@@ -494,7 +479,7 @@ class _NewHomeState extends State<NewHome> {
                                                 topRight: Radius.circular(20)),
                                             image: DecorationImage(
                                               image: AssetImage(
-                                                  "asserts/hert.jpg"),
+                                                  "asserts/Heart.jpg"),
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -509,7 +494,7 @@ class _NewHomeState extends State<NewHome> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const HertDiseaseDetection(),
+                                              const HeartDiseaseDetection(),
                                         ));
                                   },
                                   child: Padding(
@@ -520,7 +505,7 @@ class _NewHomeState extends State<NewHome> {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.start,
-                                          "Hert Disease Detection",
+                                          "Heart Disease Detection",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Colors.white),
@@ -535,6 +520,8 @@ class _NewHomeState extends State<NewHome> {
                               width: 15,
                             ),
                             Container(
+                              height: 320,
+                              width: 250,
                               decoration: BoxDecoration(
                                   color:
                                       const Color.fromARGB(255, 21, 139, 172),

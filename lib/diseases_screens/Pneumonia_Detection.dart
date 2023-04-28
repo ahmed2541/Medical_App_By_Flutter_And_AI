@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../home/home.dart';
+import '../shared/components/components.dart';
 
 class PneumoniaDetection extends StatefulWidget {
   const PneumoniaDetection({super.key});
@@ -15,6 +16,7 @@ class PneumoniaDetection extends StatefulWidget {
 }
 
 class _PneumoniaDetectionState extends State<PneumoniaDetection> {
+  bool showMore = false;
   final Uri _uri = Uri.parse(
       'https://www.mayoclinic.org/diseases-conditions/broken-leg/symptoms-causes/syc-20370412');
   File? image;
@@ -32,7 +34,47 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => upoaldImage(ImageSource.camera),
+        onPressed: () async {
+          await showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  actions: [
+                    Center(
+                      child: TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            'Ok',
+                            style: TextStyle(fontSize: 18),
+                          )),
+                    )
+                  ],
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TitleTextMessg(),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.black,
+                          ))
+                    ],
+                  ),
+                  titlePadding: const EdgeInsets.only(
+                    top: 5,
+                  ),
+                  content: ContentTextMessg(),
+                  contentPadding: const EdgeInsets.only(top: 10, left: 10),
+                );
+              });
+
+          await upoaldImage(ImageSource.camera);
+        },
         backgroundColor: const Color.fromARGB(255, 16, 31, 44).withOpacity(0.1),
         splashColor: const Color.fromARGB(255, 16, 31, 44),
         foregroundColor: Colors.white,
@@ -42,6 +84,7 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
         ),
       ),
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 3, 75, 111),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
@@ -55,7 +98,7 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
           child: Text(
             "Pneumonia Detection",
             style: TextStyle(
-                color: Color.fromARGB(255, 4, 34, 31),
+                color: Color.fromARGB(255, 153, 204, 214),
                 fontSize: 26,
                 fontWeight: FontWeight.w500,
                 wordSpacing: 2),
@@ -113,7 +156,49 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
                   width: 200,
                   child: MaterialButton(
                       height: 34,
-                      onPressed: () => upoaldImage(ImageSource.gallery),
+                      onPressed: () async {
+                        await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                actions: [
+                                  Center(
+                                    child: TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text(
+                                          'Ok',
+                                          style: TextStyle(fontSize: 18),
+                                        )),
+                                  )
+                                ],
+                                title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TitleTextMessg(),
+                                    IconButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        icon: const Icon(
+                                          Icons.close,
+                                          color: Colors.black,
+                                        ))
+                                  ],
+                                ),
+                                titlePadding: const EdgeInsets.only(
+                                  top: 5,
+                                ),
+                                content: ContentTextMessg(),
+                                contentPadding:
+                                    const EdgeInsets.only(top: 10, left: 10),
+                              );
+                            });
+
+                        await upoaldImage(ImageSource.gallery);
+                      },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -189,104 +274,172 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
                     ),
                   ),
                 ])),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 10, end: 15),
-              child: Divider(
-                height: 15,
-                color: Colors.grey[600],
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  "Symptoms",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              child: const Text(
-                "",
-                style: TextStyle(
-                  fontSize: 17,
-                  letterSpacing: 1.4,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 13,
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                "Signs and symptoms may include:",
-                style: TextStyle(
-                    fontSize: 19, height: 1.2, fontWeight: FontWeight.w500),
-              ),
-            ),
-            Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(children: [
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: const Text(
-                      "",
-                      style: TextStyle(fontSize: 18, height: 1.4),
+            if (showMore)
+              Column(
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.only(start: 10, end: 15),
+                    child: Divider(
+                      height: 15,
+                      color: Colors.grey[600],
                     ),
                   ),
-                ])),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                "",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 10, end: 15),
-              child: Divider(
-                height: 15,
-                color: Colors.grey[600],
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  "Causes",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                "",
-                style: TextStyle(
-                    fontSize: 18, height: 1.2, fontWeight: FontWeight.w500),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Symptoms",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: const Text(
+                      "",
+                      style: TextStyle(
+                        fontSize: 17,
+                        letterSpacing: 1.4,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 13,
+                  ),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: const Text(
+                      "Signs and symptoms may include:",
+                      style: TextStyle(
+                          fontSize: 19,
+                          height: 1.2,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(children: [
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: const Text(
+                            "",
+                            style: TextStyle(fontSize: 18, height: 1.4),
+                          ),
+                        ),
+                      ])),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     alignment: Alignment.topLeft,
                     child: const Text(
                       "",
-                      style: TextStyle(fontSize: 17, height: 1.2),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.only(start: 10, end: 15),
+                    child: Divider(
+                      height: 15,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Causes",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: const Text(
+                      "",
+                      style: TextStyle(
+                          fontSize: 18,
+                          height: 1.2,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(children: [
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: const Text(
+                            "",
+                            style: TextStyle(fontSize: 17, height: 1.2),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: const Text(
+                            "",
+                            style: TextStyle(fontSize: 17, height: 1.2),
+                          ),
+                        ),
+                      ])),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.only(start: 10, end: 15),
+                    child: Divider(
+                      height: 15,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Risk factors",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: const Text(
+                      "",
+                      style: TextStyle(
+                          fontSize: 20,
+                          height: 1.2,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      child: const Text(
+                        "",
+                        style: TextStyle(
+                          fontSize: 20,
+                          height: 1.4,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -296,116 +449,80 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
                     alignment: Alignment.topLeft,
                     child: const Text(
                       "",
-                      style: TextStyle(fontSize: 17, height: 1.2),
+                      style: TextStyle(
+                          fontSize: 20,
+                          height: 1.2,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
-                ])),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 10, end: 15),
-              child: Divider(
-                height: 15,
-                color: Colors.grey[600],
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  "Risk factors",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                "",
-                style: TextStyle(
-                    fontSize: 20, height: 1.2, fontWeight: FontWeight.w500),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                alignment: Alignment.topLeft,
-                child: const Text(
-                  "",
-                  style: TextStyle(
-                    fontSize: 20,
-                    height: 1.4,
-                    fontWeight: FontWeight.w400,
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.only(start: 10, end: 15),
+                    child: Divider(
+                      height: 15,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Complications",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.only(start: 10, end: 15),
+                    child: Divider(
+                      height: 15,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Prevention",
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: TextButton(
+                      child: const Text(
+                        'Refrence From...',
+                        style: TextStyle(fontSize: 21),
+                      ),
+                      onPressed: () {
+                        launchUrl(_uri);
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                "",
-                style: TextStyle(
-                    fontSize: 20, height: 1.2, fontWeight: FontWeight.w500),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 10, end: 15),
-              child: Divider(
-                height: 15,
-                color: Colors.grey[600],
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  "Complications",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 10, end: 15),
-              child: Divider(
-                height: 15,
-                color: Colors.grey[600],
-              ),
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  "Prevention",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: TextButton(
-                child: const Text(
-                  'Refrence From...',
-                  style: TextStyle(fontSize: 21),
-                ),
-                onPressed: () {
-                  launchUrl(_uri);
-                },
-              ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  showMore = !showMore;
+                });
+              },
+              child: Text(showMore ? 'See Less' : 'See More'),
             ),
           ]),
         ),

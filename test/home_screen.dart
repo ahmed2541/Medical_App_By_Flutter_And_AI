@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-import '../lib/diseases_screens/Broken_Leg_Page.dart';
+import '../lib/test/Broken_Leg_Page.dart';
 import '../lib/models/model_home.dart';
 
 List<String> names_Disease = [

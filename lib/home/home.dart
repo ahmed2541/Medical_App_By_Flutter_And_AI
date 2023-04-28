@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../chat/chatBot.dart';
 import '../diseases_screens/Alzheimer_Detection.dart';
 import '../diseases_screens/Bone_Fracture_Detection.dart';
-import '../diseases_screens/Brain_Tomour_Detection.dart';
-import '../diseases_screens/Broken_Leg_Page.dart';
-import '../diseases_screens/Hert_Disease_Detection.dart';
+import '../diseases_screens/Brain_Tumor_Detection.dart';
+import '../test/Broken_Leg_Page.dart';
+import '../diseases_screens/Heart_Disease_Detection.dart';
 import '../diseases_screens/Pneumonia_Detection.dart';
 
 class Home extends StatefulWidget {
@@ -214,7 +214,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const BrainTomourDetection(),
+                                            const BrainTumorDetection(),
                                       ));
                                 },
                                 child: Container(
@@ -238,7 +238,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const BrainTomourDetection(),
+                                            const BrainTumorDetection(),
                                       ));
                                 },
                                 child: Padding(
@@ -251,7 +251,7 @@ class _HomeState extends State<Home> {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.start,
-                                          "Brain Tomour Detection",
+                                          "Brain Tumor Detection",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Color.fromARGB(
@@ -282,7 +282,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const HertDiseaseDetection(),
+                                            const HeartDiseaseDetection(),
                                       ));
                                 },
                                 child: Container(
@@ -294,7 +294,7 @@ class _HomeState extends State<Home> {
                                         topLeft: Radius.circular(20),
                                         topRight: Radius.circular(20)),
                                     image: DecorationImage(
-                                      image: AssetImage("asserts/hert.jpg"),
+                                      image: AssetImage("asserts/heart.jpg"),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -306,7 +306,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const HertDiseaseDetection(),
+                                            const HeartDiseaseDetection(),
                                       ));
                                 },
                                 child: Padding(
@@ -319,7 +319,7 @@ class _HomeState extends State<Home> {
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.start,
-                                          "Hert Disease Detection",
+                                          "Heart Disease Detection",
                                           style: TextStyle(
                                               fontSize: 18,
                                               color: Color.fromARGB(

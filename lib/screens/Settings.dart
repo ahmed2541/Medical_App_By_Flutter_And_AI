@@ -14,7 +14,11 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Setting",style: TextStyle(fontSize: 22),),
+        backgroundColor: const Color.fromARGB(255, 3, 75, 111),
+        title: Text(
+          "Setting",
+          style: TextStyle(fontSize: 22),
+        ),
       ),
       body: Container(
         color: Colors.white,
@@ -48,6 +52,26 @@ class _SettingPageState extends State<SettingPage> {
               ),
               title: Text(
                 "Language",
+                style: TextStyle(fontSize: 25, color: Colors.blue),
+              ),
+              onTap: () {},
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 8.0),
+              child: Divider(
+                height: 15,
+                thickness: 1,
+                color: Colors.grey[400],
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.border_color_outlined,
+                size: 29,
+                color: Color.fromARGB(255, 182, 18, 18),
+              ),
+              title: Text(
+                "Theme",
                 style: TextStyle(fontSize: 25, color: Colors.blue),
               ),
               onTap: () {},

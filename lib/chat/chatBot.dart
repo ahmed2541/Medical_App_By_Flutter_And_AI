@@ -14,12 +14,12 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: const Color.fromARGB(255, 3, 75, 111),
         title: const Center(
           child: Text(
-            "Chat App",
+            "MedicalBot",
             style: TextStyle(
-                fontSize: 27, color: Colors.white, fontWeight: FontWeight.w500,letterSpacing: 2),
+                fontSize: 28, color: Colors.white, fontWeight: FontWeight.w500,letterSpacing: 1),
           ),
         ),
       ),

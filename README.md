@@ -8,4 +8,5 @@ Medicine field one of the most important science in our life and what about if w
 
 Refrences:
     - Bone Fracture : https://www.pennmedicine.org/for-patients-and-visitors/patient-information/conditions-treated-a-to-z/bone-fractures
-    - Brain Tomour : https://www.mayoclinic.org/diseases-conditions/brain-tumor/symptoms-causes/syc-20350084
+    - Brain Tumor : https://www.mayoclinic.org/diseases-conditions/brain-tumor/symptoms-causes/syc-20350084
+    - Heart Disease : https://www.mayoclinic.org/diseases-conditions/heart-disease/symptoms-causes/syc-20353118

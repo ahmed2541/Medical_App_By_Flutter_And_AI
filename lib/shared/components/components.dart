@@ -49,3 +49,84 @@ Widget defaultElvaButyon({
 //       // TODO: implement TextButton
 //       throw UnimplementedError();
 //     }
+
+Widget HomeStyle({
+  double width = 250,
+  double heightContainer = 320,
+  Color color = const Color.fromARGB(255, 21, 139, 172),
+  double radiusContainer = 30,
+  double radiusText = 20,
+  double heightImg = 270,
+  Function? touchTex,
+  Function? touchCont,
+  required String image,
+  required String text,
+}) =>
+    Container(
+      height: heightContainer,
+      width: width,
+      decoration: BoxDecoration(
+          color: color, borderRadius: BorderRadius.circular(radiusContainer)),
+      child: Column(children: [
+        Container(
+          decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(radiusContainer)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: touchCont!(),
+                child: Container(
+                  width: width,
+                  height: heightImg,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(radiusText),
+                        topRight: Radius.circular(radiusText)),
+                    image: DecorationImage(
+                      image: AssetImage("asserts/$image.jpg"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        TextButton(
+          onPressed: touchCont(),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Column(
+              children: [
+                Text(
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  "${text.toString()}",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ]),
+    );
+
+Widget TitleTextMessg({
+  String text = 'Warring',
+}) =>
+    Padding(
+      padding: EdgeInsets.only(left: 87.0),
+      child: Text(
+        text,
+        style: TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 20, color: Colors.red),
+      ),
+    );
+
+Widget ContentTextMessg({
+  String text = 'The accuracy is 89% and you must also consult a doctor',
+}) =>
+    Text(text);
