@@ -3,7 +3,6 @@ import 'package:tflite/tflite.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../home/home.dart';
 import '../results/results.dart';
 import '../shared/components/components.dart';
 
@@ -256,9 +255,10 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                             });
 
                         await upoaldImage(ImageSource.gallery);
-                        // ignore: use_build_context_synchronously
+                       
                         image == null
                             ? Text('')
+                            // ignore: use_build_context_synchronously
                             : await Navigator.push(
                                 context,
                                 MaterialPageRoute(

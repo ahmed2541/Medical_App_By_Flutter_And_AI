@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:medicalappsproject/home/load_home.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../chat/chatBot.dart';
 import '../diseases_screens/Alzheimer_Detection.dart';
 import '../diseases_screens/Bone_Fracture_Detection.dart';
@@ -10,6 +11,7 @@ import '../models/model_home.dart';
 import '../screens/AboutUs.dart';
 import '../screens/Settings.dart';
 import '../shared/components/components.dart';
+import '../shared/components/costants.dart';
 
 class NewHome extends StatefulWidget {
   const NewHome({super.key});
@@ -20,8 +22,18 @@ class NewHome extends StatefulWidget {
 
 class _NewHomeState extends State<NewHome> {
   var search = TextEditingController();
-
+  bool _isLoading = true;
   @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration(seconds: 5), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -55,7 +67,7 @@ class _NewHomeState extends State<NewHome> {
                 builder: (context) => const Chat(),
               ));
         },
-        backgroundColor: const Color.fromARGB(255, 5, 53, 78).withOpacity(0.6),
+        backgroundColor: const Color.fromARGB(255, 5, 53, 78).withOpacity(0.4),
         splashColor: const Color.fromARGB(255, 5, 27, 40),
         foregroundColor: Colors.white,
         child: const Icon(Icons.chat),
@@ -89,7 +101,9 @@ class _NewHomeState extends State<NewHome> {
               leading: const Icon(Icons.account_box_outlined),
               textColor: Colors.black,
               iconColor: Colors.black,
-              onTap: () {},
+              onTap: () {
+          
+              },
             ),
             const Divider(
               thickness: 1,
@@ -143,150 +157,208 @@ class _NewHomeState extends State<NewHome> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(3.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Fracture Detection',
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 320,
-                    width: 270,
-                    child: Column(
+      body: Stack(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: _isLoading
+                ? Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      loadingHome(),
+                      SpinKitCircle(
+                        color: Colors.blue,
+                        size: 50.0,
+                      ),
+                    ],
+                  )
+                : Container(),
+          ),
+          Visibility(
+            visible: !_isLoading,
+            child: Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Fracture Detection',
+                          style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 21, 139, 172),
-                              borderRadius: BorderRadius.circular(30)),
+                          height: 320,
+                          width: 270,
                           child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const BoneFractureDetection(),
-                                        ));
-                                  },
-                                  child: Container(
-                                    height: 270,
-                                    decoration: const BoxDecoration(
-                                      color: Color.fromARGB(255, 21, 139, 172),
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20),
-                                          topRight: Radius.circular(20)),
-                                      image: DecorationImage(
-                                        image:
-                                            AssetImage("asserts/2103214.jpg"),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const BoneFractureDetection(),
-                                        ));
-                                  },
-                                  child: Column(
-                                    children: const [
-                                      Center(
-                                        child: Text(
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          "Bone Fracture Detection",
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Color.fromARGB(
-                                                  255, 255, 255, 255)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ]),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const Divider(
-                height: 25,
-                thickness: 3,
-                color: Colors.black,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Brain Diseases',
-                    style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Container(
-                        height: 320,
-                        child: ListView(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Container(
-                              height: 320,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 21, 139, 172),
-                                  borderRadius: BorderRadius.circular(30)),
-                              child: Column(children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 21, 139, 172),
-                                      borderRadius: BorderRadius.circular(30)),
-                                  child: Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromARGB(255, 21, 139, 172),
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       GestureDetector(
                                         onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const BoneFractureDetection(),
+                                              ));
+                                        },
+                                        child: Container(
+                                          height: 270,
+                                          decoration: const BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 21, 139, 172),
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20)),
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                  "asserts/2103214.jpg"),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const BoneFractureDetection(),
+                                              ));
+                                        },
+                                        child: Column(
+                                          children: const [
+                                            Center(
+                                              child: Text(
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                "Bone Fracture Detection",
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    color: Color.fromARGB(
+                                                        255, 255, 255, 255)),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      height: 25,
+                      thickness: 3,
+                      color: Colors.black,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Brain Diseases',
+                          style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: Container(
+                              height: 320,
+                              child: ListView(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  Container(
+                                    height: 320,
+                                    width: 250,
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            255, 21, 139, 172),
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    child: Column(children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                255, 21, 139, 172),
+                                            borderRadius:
+                                                BorderRadius.circular(30)),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const BrainTumorDetection(),
+                                                    ));
+                                              },
+                                              child: Container(
+                                                width: 250,
+                                                height: 270,
+                                                decoration: const BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  20),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  20)),
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        "asserts/brain.jpg"),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -294,74 +366,82 @@ class _NewHomeState extends State<NewHome> {
                                                     const BrainTumorDetection(),
                                               ));
                                         },
-                                        child: Container(
-                                          width: 250,
-                                          height: 270,
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(20),
-                                                topRight: Radius.circular(20)),
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  "asserts/brain.jpg"),
-                                              fit: BoxFit.cover,
-                                            ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 8),
+                                          child: Column(
+                                            children: const [
+                                              Text(
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.start,
+                                                "Brain Tumor Detection",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                    ],
+                                    ]),
                                   ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const BrainTumorDetection(),
-                                        ));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Column(
-                                      children: const [
-                                        Text(
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.start,
-                                          "Brain Tumor Detection",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.white),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  Container(
+                                    height: 320,
+                                    width: 250,
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            255, 21, 139, 172),
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    child: Column(children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                255, 21, 139, 172),
+                                            borderRadius:
+                                                BorderRadius.circular(30)),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const AlzheimerDetection(),
+                                                    ));
+                                              },
+                                              child: Container(
+                                                width: 250,
+                                                height: 270,
+                                                decoration: const BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  20),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  20)),
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        "asserts/images.jpg"),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ]),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Container(
-                              height: 320,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 21, 139, 172),
-                                  borderRadius: BorderRadius.circular(30)),
-                              child: Column(children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 21, 139, 172),
-                                      borderRadius: BorderRadius.circular(30)),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -369,111 +449,120 @@ class _NewHomeState extends State<NewHome> {
                                                     const AlzheimerDetection(),
                                               ));
                                         },
-                                        child: Container(
-                                          width: 250,
-                                          height: 270,
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(20),
-                                                topRight: Radius.circular(20)),
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  "asserts/images.jpg"),
-                                              fit: BoxFit.cover,
-                                            ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 8),
+                                          child: Column(
+                                            children: const [
+                                              Text(
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.start,
+                                                "Alzheimer Detection",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                    ],
+                                    ]),
                                   ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const AlzheimerDetection(),
-                                        ));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Column(
-                                      children: const [
-                                        Text(
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.start,
-                                          "Alzheimer Detection",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ]),
+                                ],
+                              ),
                             ),
-                          ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Divider(
+                      height: 25,
+                      thickness: 3,
+                      color: Colors.black,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Heart and Respiratory Diseases',
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const Divider(
-                height: 25,
-                thickness: 3,
-                color: Colors.black,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Heart and Respiratory Diseases',
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Container(
-                        height: 320,
-                        width: 375,
-                        child: ListView(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            Container(
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: Container(
                               height: 320,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 21, 139, 172),
-                                  borderRadius: BorderRadius.circular(30)),
-                              child: Column(children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 21, 139, 172),
-                                      borderRadius: BorderRadius.circular(30)),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
+                              width: 375,
+                              child: ListView(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  Container(
+                                    height: 320,
+                                    width: 250,
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            255, 21, 139, 172),
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    child: Column(children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                255, 21, 139, 172),
+                                            borderRadius:
+                                                BorderRadius.circular(30)),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const HeartDiseaseDetection(),
+                                                    ));
+                                              },
+                                              child: Container(
+                                                width: 250,
+                                                height: 270,
+                                                decoration: const BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  20),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  20)),
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        "asserts/Heart.jpg"),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -481,74 +570,82 @@ class _NewHomeState extends State<NewHome> {
                                                     const HeartDiseaseDetection(),
                                               ));
                                         },
-                                        child: Container(
-                                          width: 250,
-                                          height: 270,
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(20),
-                                                topRight: Radius.circular(20)),
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  "asserts/Heart.jpg"),
-                                              fit: BoxFit.cover,
-                                            ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 8),
+                                          child: Column(
+                                            children: const [
+                                              Text(
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.start,
+                                                "Heart Disease Detection",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                    ],
+                                    ]),
                                   ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HeartDiseaseDetection(),
-                                        ));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Column(
-                                      children: const [
-                                        Text(
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.start,
-                                          "Heart Disease Detection",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.white),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  Container(
+                                    height: 320,
+                                    width: 250,
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            255, 21, 139, 172),
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    child: Column(children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                255, 21, 139, 172),
+                                            borderRadius:
+                                                BorderRadius.circular(30)),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const PneumoniaDetection(),
+                                                    ));
+                                              },
+                                              child: Container(
+                                                width: 250,
+                                                height: 270,
+                                                decoration: const BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  20),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  20)),
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        "asserts/Pneumonia.jpg"),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ]),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Container(
-                              height: 320,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 21, 139, 172),
-                                  borderRadius: BorderRadius.circular(30)),
-                              child: Column(children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 21, 139, 172),
-                                      borderRadius: BorderRadius.circular(30)),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -556,62 +653,39 @@ class _NewHomeState extends State<NewHome> {
                                                     const PneumoniaDetection(),
                                               ));
                                         },
-                                        child: Container(
-                                          width: 250,
-                                          height: 270,
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(20),
-                                                topRight: Radius.circular(20)),
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  "asserts/Pneumonia.jpg"),
-                                              fit: BoxFit.cover,
-                                            ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 8),
+                                          child: Column(
+                                            children: const [
+                                              Text(
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.start,
+                                                "Pneumonia Detection",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.white),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                    ],
+                                    ]),
                                   ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const PneumoniaDetection(),
-                                        ));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Column(
-                                      children: const [
-                                        Text(
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.start,
-                                          "Pneumonia Detection",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ]),
+                                ],
+                              ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -130,3 +130,4 @@ Widget ContentTextMessg({
   String text = 'The accuracy is 89% and you must also consult a doctor\nIf the result does not appear, go back and try again',
 }) =>
     Text(text);
+

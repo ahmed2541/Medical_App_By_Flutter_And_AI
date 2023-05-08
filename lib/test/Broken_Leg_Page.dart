@@ -64,6 +64,7 @@ class _BrokenLegState extends State<BrokenLeg> {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(children: [
+
             Container(
               height: 290,
               width: double.infinity,
@@ -685,3 +686,4 @@ class _BrokenLegState extends State<BrokenLeg> {
     );
   }
 }
+

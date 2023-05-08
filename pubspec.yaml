@@ -38,6 +38,7 @@ dependencies:
   image_picker: ^0.8.7+1
   url_launcher: ^6.1.10
   tflite: ^1.1.2
+  flutter_spinkit: ^5.2.0
 
 dev_dependencies:
   flutter_test:
