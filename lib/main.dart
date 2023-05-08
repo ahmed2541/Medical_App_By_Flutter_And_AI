@@ -20,7 +20,7 @@ class MedicalApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   MaterialApp(
+    return   const MaterialApp(
       title: 'Medical App',
       debugShowCheckedModeBanner: false,
       home:FirstPage() ,

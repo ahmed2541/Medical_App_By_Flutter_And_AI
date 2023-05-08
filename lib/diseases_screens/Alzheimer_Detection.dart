@@ -496,20 +496,6 @@ class _AlzheimerDetectionState extends State<AlzheimerDetection> {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: TextButton(
-                      child: const Text(
-                        'Refrence From...',
-                        style: TextStyle(fontSize: 21),
-                      ),
-                      onPressed: () {
-                        launchUrl(_uri);
-                      },
-                    ),
-                  ),
                 ],
               ),
             TextButton(
@@ -519,6 +505,22 @@ class _AlzheimerDetectionState extends State<AlzheimerDetection> {
                 });
               },
               child: Text(showMore ? 'See Less' : 'See More'),
+            ),
+            Divider(
+              thickness: 3,
+              height: 25,
+              color: Colors.grey[600],
+            ),
+            Center(
+              child: TextButton(
+                child: const Text(
+                  'Refrence From...',
+                  style: TextStyle(fontSize: 21),
+                ),
+                onPressed: () {
+                  launchUrl(_uri);
+                },
+              ),
             ),
           ]),
         ),

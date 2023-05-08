@@ -43,7 +43,7 @@ class SecondPage extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  "Healthy App",
+                  "Medical App",
                   style: TextStyle(
                     fontSize: 40,
                     color: Color.fromARGB(255, 3, 83, 164),

@@ -1,9 +1,10 @@
 import 'dart:io';
+import 'package:tflite/tflite.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../home/home.dart';
+import '../results/results.dart';
 import '../shared/components/components.dart';
 
 class BrainTumorDetection extends StatefulWidget {
@@ -17,15 +18,60 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
   bool showMore = false;
   final Uri _uri = Uri.parse(
       'https://www.mayoclinic.org/diseases-conditions/brain-tumor/symptoms-causes/syc-20350084');
+
+  String result = '';
   File? image;
-  final imagePicker = ImagePicker();
+  late var imagePicker = ImagePicker();
   upoaldImage(ImageSource source) async {
     var pickedImage = await imagePicker.pickImage(source: source);
     if (pickedImage != null) {
       setState(() {
         image = File(pickedImage.path);
+        doImageClassification();
       });
     } else {}
+  }
+
+  loadModel() async {
+    String? output = await Tflite.loadModel(
+        model: 'asserts/modules/model_brain_tumour.tflite',
+        labels: 'asserts/modules/labels_brain_tumour.txt',
+        numThreads: 1,
+        isAsset: true,
+        useGpuDelegate: false);
+    print(output);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    imagePicker = ImagePicker();
+    loadModel();
+  }
+
+  doImageClassification() async {
+    var recogn = await Tflite.runModelOnImage(
+        path: image!.path,
+        imageMean: 0.0,
+        imageStd: 255.0,
+        threshold: 0.1,
+        asynch: true,
+        numResults: 2);
+
+    print(recogn!.length.toString());
+
+    setState(() {
+      result = '';
+    });
+
+    recogn.forEach(
+      (element) {
+        setState(() {
+          print(element.toString());
+          result += element['label'] + '\n';
+        });
+      },
+    );
   }
 
   @override
@@ -72,6 +118,17 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
               });
 
           await upoaldImage(ImageSource.camera);
+          // ignore: use_build_context_synchronously
+          image == null
+              ? Text(' select an image')
+              : await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetectionResult(
+                      image: image!,
+                      result: result,
+                    ),
+                  ));
         },
         backgroundColor: const Color.fromARGB(255, 16, 31, 44).withOpacity(0.1),
         splashColor: const Color.fromARGB(255, 16, 31, 44),
@@ -199,6 +256,17 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                             });
 
                         await upoaldImage(ImageSource.gallery);
+                        // ignore: use_build_context_synchronously
+                        image == null
+                            ? Text('')
+                            : await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetectionResult(
+                                    image: image!,
+                                    result: result,
+                                  ),
+                                ));
                       },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,27 +285,46 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                         ],
                       )),
                 ),
-                image == null
-                    ? const Text("")
-                    : Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: const Center(
-                            child: Text(
-                              "Sorry, Unfortunately we haven't added the module to diagnose your disease yet, don't worry we will add it soon...",
-                              style: TextStyle(
-                                  color: Color.fromARGB(200, 174, 6, 6),
-                                  fontSize: 20),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ),
+                SizedBox(
+                  height: 10,
+                )
+                // image == null
+                //     ? Padding(
+                //         padding: const EdgeInsets.only(top: 8.0),
+                //         child: const Text("choose image"),
+                //       )
+                //     : Column(
+                //         children: [
+                //           Padding(
+                //             padding: const EdgeInsets.all(8.0),
+                //             child: Container(
+                //               decoration: BoxDecoration(
+                //                 color: Color.fromARGB(198, 0, 0, 0),
+                //                   border: Border.all(),
+                //                   borderRadius: BorderRadius.circular(20)),
+                //               child: Image.file(
+                //                 image!,
+                //                 height: 300,
+                //                 width: 400,
+                //                 fit: BoxFit.contain,
+                //               ),
+                //             ),
+                //           ),
+                //           SizedBox(
+                //             height: 8,
+                //           ),
+                //           Text(
+                //             result,
+                //             textAlign: TextAlign.center,
+                //             style: TextStyle(
+                //                 fontSize: 25,
+                //                 color: Colors.black,
+                //                 backgroundColor: Colors.blueAccent),
+                //           )
+
+                //         ],
+                //       ),
               ],
-            ),
-            const SizedBox(
-              height: 15,
             ),
             Padding(
               padding: const EdgeInsetsDirectional.only(start: 10, end: 15),
@@ -295,7 +382,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    icon: const Icon(Icons.close_fullscreen,
+                                    icon: const Icon(Icons.fullscreen_exit,
                                         size: 30)),
                               ],
                             ),
@@ -359,7 +446,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                     Navigator.of(context).pop();
                                                   },
                                                   icon: const Icon(
-                                                      Icons.close_fullscreen,
+                                                      Icons.fullscreen_exit,
                                                       size: 30)),
                                             ],
                                           ),
@@ -390,7 +477,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                     );
                                   },
                                   icon: const Icon(
-                                    Icons.fullscreen_exit,
+                                    Icons.fullscreen,
                                     size: 35,
                                   )),
                             ],
@@ -560,7 +647,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                               },
                                                               icon: const Icon(
                                                                   Icons
-                                                                      .close_fullscreen,
+                                                                      .fullscreen_exit,
                                                                   size: 30)),
                                                         ],
                                                       ),
@@ -599,7 +686,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                 );
                                               },
                                               icon: const Icon(
-                                                Icons.fullscreen_exit,
+                                                Icons.fullscreen,
                                                 size: 35,
                                               )),
                                         ],
@@ -682,7 +769,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                               },
                                                               icon: const Icon(
                                                                   Icons
-                                                                      .close_fullscreen,
+                                                                      .fullscreen_exit,
                                                                   size: 30)),
                                                         ],
                                                       ),
@@ -721,7 +808,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                 );
                                               },
                                               icon: const Icon(
-                                                Icons.fullscreen_exit,
+                                                Icons.fullscreen,
                                                 size: 35,
                                               )),
                                         ],
@@ -804,7 +891,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                               },
                                                               icon: const Icon(
                                                                   Icons
-                                                                      .close_fullscreen,
+                                                                      .fullscreen_exit,
                                                                   size: 30)),
                                                         ],
                                                       ),
@@ -843,7 +930,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                 );
                                               },
                                               icon: const Icon(
-                                                Icons.fullscreen_exit,
+                                                Icons.fullscreen,
                                                 size: 35,
                                               )),
                                         ],
@@ -1239,7 +1326,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                             Navigator.of(context).pop();
                                           },
                                           icon: const Icon(
-                                              Icons.close_fullscreen,
+                                              Icons.fullscreen_exit,
                                               size: 30)),
                                     ],
                                   ),
@@ -1313,7 +1400,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                         },
                                                         icon: const Icon(
                                                             Icons
-                                                                .close_fullscreen,
+                                                                .fullscreen_exit,
                                                             size: 30)),
                                                   ],
                                                 ),
@@ -1346,7 +1433,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                           );
                                         },
                                         icon: const Icon(
-                                          Icons.fullscreen_exit,
+                                          Icons.fullscreen,
                                           size: 35,
                                         )),
                                   ],
@@ -1507,7 +1594,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                             Navigator.of(context).pop();
                                           },
                                           icon: const Icon(
-                                              Icons.close_fullscreen,
+                                              Icons.fullscreen_exit,
                                               size: 30)),
                                     ],
                                   ),
@@ -1578,7 +1665,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                         },
                                                         icon: const Icon(
                                                             Icons
-                                                                .close_fullscreen,
+                                                                .fullscreen_exit,
                                                             size: 30)),
                                                   ],
                                                 ),
@@ -1611,7 +1698,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                           );
                                         },
                                         icon: const Icon(
-                                          Icons.fullscreen_exit,
+                                          Icons.fullscreen,
                                           size: 35,
                                         )),
                                   ],
@@ -1905,22 +1992,6 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                       ],
                     ),
                   ),
-                  Divider(
-                    thickness: 3,
-                    height: 25,
-                    color: Colors.grey[600],
-                  ),
-                  Center(
-                    child: TextButton(
-                      child: const Text(
-                        'Refrence From...',
-                        style: TextStyle(fontSize: 21),
-                      ),
-                      onPressed: () {
-                        launchUrl(_uri);
-                      },
-                    ),
-                  ),
                 ],
               ),
             TextButton(
@@ -1930,6 +2001,22 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                 });
               },
               child: Text(showMore ? 'See Less' : 'See More'),
+            ),
+            Divider(
+              thickness: 3,
+              height: 25,
+              color: Colors.grey[600],
+            ),
+            Center(
+              child: TextButton(
+                child: const Text(
+                  'Refrence From...',
+                  style: TextStyle(fontSize: 21),
+                ),
+                onPressed: () {
+                  launchUrl(_uri);
+                },
+              ),
             ),
           ]),
         ),

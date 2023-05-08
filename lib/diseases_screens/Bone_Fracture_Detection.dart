@@ -72,6 +72,7 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
               });
 
           await upoaldImage(ImageSource.camera);
+          
         },
         backgroundColor: const Color.fromARGB(255, 16, 31, 44).withOpacity(0.1),
         splashColor: const Color.fromARGB(255, 16, 31, 44),
@@ -296,7 +297,7 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
               height: 6,
             ),
             const Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(left:8.0),
               child: Text(
                 textAlign: TextAlign.start,
                 "Bone - broken; Fracture; Stress fracture; Bone fracture",
@@ -304,16 +305,17 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
                     fontSize: 18, height: 1.2, fontWeight: FontWeight.w400),
               ),
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
-              child: Divider(
-                height: 10,
-                color: Colors.grey[600],
-              ),
-            ),
             if (showMore)
               Column(
                 children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.only(start: 10, end: 10),
+                    child: Divider(
+                      height: 10,
+                      color: Colors.grey[600],
+                    ),
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
@@ -727,25 +729,6 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
                           ),
                         ),
                       ])),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(start: 0, end: 0),
-                    child: Divider(
-                      thickness: 2,
-                      height: 20,
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  Center(
-                    child: TextButton(
-                      child: const Text(
-                        'Refrence From...',
-                        style: TextStyle(fontSize: 21),
-                      ),
-                      onPressed: () {
-                        launchUrl(_uri);
-                      },
-                    ),
-                  ),
                 ],
               ),
             TextButton(
@@ -756,6 +739,25 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
               },
               child: Text(
                 showMore ? 'See Less' : 'See More',
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 0, end: 0),
+              child: Divider(
+                thickness: 2,
+                height: 20,
+                color: Colors.grey[600],
+              ),
+            ),
+            Center(
+              child: TextButton(
+                child: const Text(
+                  'Refrence From...',
+                  style: TextStyle(fontSize: 21),
+                ),
+                onPressed: () {
+                  launchUrl(_uri);
+                },
               ),
             ),
           ]),

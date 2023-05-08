@@ -33,7 +33,7 @@ class ThirdPage extends StatelessWidget {
                     height: 10,
                   ),
                   const Text(
-                    "Go Healthy App",
+                    "Go Medical App",
                     style: TextStyle(
                         shadows: [Shadow(offset: Offset.infinite)],
                         fontSize: 35,

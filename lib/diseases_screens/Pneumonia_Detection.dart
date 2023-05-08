@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tflite/tflite.dart';
 
 import '../home/home.dart';
+import '../results/results.dart';
 import '../shared/components/components.dart';
 
 class PneumoniaDetection extends StatefulWidget {
@@ -19,15 +21,59 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
   bool showMore = false;
   final Uri _uri = Uri.parse(
       'https://www.mayoclinic.org/diseases-conditions/broken-leg/symptoms-causes/syc-20370412');
+  String result = '';
   File? image;
-  final imagePicker = ImagePicker();
+  late var imagePicker = ImagePicker();
   upoaldImage(ImageSource source) async {
     var pickedImage = await imagePicker.pickImage(source: source);
     if (pickedImage != null) {
       setState(() {
         image = File(pickedImage.path);
+        doImageClassification();
       });
     } else {}
+  }
+
+  loadModel() async {
+    String? output = await Tflite.loadModel(
+        model: 'asserts/modules/model.tflite',
+        labels: 'asserts/modules/labels.txt',
+        numThreads: 1,
+        isAsset: true,
+        useGpuDelegate: false);
+    print(output);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    imagePicker = ImagePicker();
+    loadModel();
+  }
+
+  doImageClassification() async {
+    var recogn = await Tflite.runModelOnImage(
+        path: image!.path,
+        imageMean: 0.0,
+        imageStd: 255.0,
+        threshold: 0.1,
+        asynch: true,
+        numResults: 2);
+
+    print(recogn!.length.toString());
+
+    setState(() {
+      result = '';
+    });
+
+    recogn.forEach(
+      (element) {
+        setState(() {
+          print(element.toString());
+          result += element['label'] + '\n\n';
+        });
+      },
+    );
   }
 
   @override
@@ -74,6 +120,16 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
               });
 
           await upoaldImage(ImageSource.camera);
+          image == null
+              ? Text('')
+              : await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetectionResult(
+                      image: image!,
+                      result: result,
+                    ),
+                  ));
         },
         backgroundColor: const Color.fromARGB(255, 16, 31, 44).withOpacity(0.1),
         splashColor: const Color.fromARGB(255, 16, 31, 44),
@@ -177,7 +233,10 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    TitleTextMessg(),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: TitleTextMessg(),
+                                    ),
                                     IconButton(
                                         onPressed: () {
                                           Navigator.of(context).pop();
@@ -198,6 +257,17 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
                             });
 
                         await upoaldImage(ImageSource.gallery);
+                        // ignore: use_build_context_synchronously
+                        image == null
+                            ? Text(' select an image')
+                            : await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetectionResult(
+                                    image: image!,
+                                    result: result,
+                                  ),
+                                ));
                       },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,27 +286,42 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
                         ],
                       )),
                 ),
-                image == null
-                    ? const Text("")
-                    : Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: const Center(
-                            child: Text(
-                              "Sorry, Unfortunately we haven't added the module to diagnose your disease yet, don't worry we will add it soon...",
-                              style: TextStyle(
-                                  color: Color.fromARGB(200, 174, 6, 6),
-                                  fontSize: 20),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ),
+                // image == null
+                //     ? Padding(
+                //         padding: const EdgeInsets.only(top: 8.0),
+                //         child: const Text("choose image"),
+                //       )
+                //     : Column(
+                //         children: [
+                //           Padding(
+                //             padding: const EdgeInsets.all(8.0),
+                //             child: Image.file(
+                //               image!,
+                //               height: 300,
+                //               width: 400,
+                //               fit: BoxFit.cover,
+                //             ),
+                //           ),
+                //           SizedBox(
+                //             height: 20,
+                //           ),
+                //           Container(
+                //             child: Text(
+                //               result,
+                //               textAlign: TextAlign.center,
+                //               style: TextStyle(
+                //                   fontSize: 25,
+                //                   color: Colors.black,
+                //                   backgroundColor: Colors.blueAccent),
+                //             ),
+                //           )
+
+                //         ],
+                //       ),
               ],
             ),
             const SizedBox(
-              height: 15,
+              height: 8,
             ),
             Padding(
               padding: const EdgeInsetsDirectional.only(start: 10, end: 15),
@@ -500,20 +585,6 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Center(
-                    child: TextButton(
-                      child: const Text(
-                        'Refrence From...',
-                        style: TextStyle(fontSize: 21),
-                      ),
-                      onPressed: () {
-                        launchUrl(_uri);
-                      },
-                    ),
-                  ),
                 ],
               ),
             TextButton(
@@ -523,6 +594,22 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
                 });
               },
               child: Text(showMore ? 'See Less' : 'See More'),
+            ),
+            Divider(
+              thickness: 3,
+              height: 25,
+              color: Colors.grey[600],
+            ),
+            Center(
+              child: TextButton(
+                child: const Text(
+                  'Refrence From...',
+                  style: TextStyle(fontSize: 21),
+                ),
+                onPressed: () {
+                  launchUrl(_uri);
+                },
+              ),
             ),
           ]),
         ),

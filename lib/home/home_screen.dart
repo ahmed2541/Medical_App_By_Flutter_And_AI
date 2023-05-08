@@ -85,6 +85,17 @@ class _NewHomeState extends State<NewHome> {
               height: 4,
             ),
             ListTile(
+              title: const Text("Profile"),
+              leading: const Icon(Icons.account_box_outlined),
+              textColor: Colors.black,
+              iconColor: Colors.black,
+              onTap: () {},
+            ),
+            const Divider(
+              thickness: 1,
+              height: 4,
+            ),
+            ListTile(
               title: const Text("About US"),
               leading: const Icon(Icons.manage_accounts_outlined),
               textColor: Colors.black,

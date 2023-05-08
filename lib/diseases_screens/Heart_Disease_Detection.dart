@@ -1006,7 +1006,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    icon: const Icon(Icons.close_fullscreen,
+                                    icon: const Icon(Icons.fullscreen_exit,
                                         size: 30)),
                               ],
                             ),
@@ -1069,7 +1069,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                                                     Navigator.of(context).pop();
                                                   },
                                                   icon: const Icon(
-                                                      Icons.close_fullscreen,
+                                                      Icons.fullscreen_exit,
                                                       size: 30)),
                                             ],
                                           ),
@@ -1100,7 +1100,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                                     );
                                   },
                                   icon: const Icon(
-                                    Icons.fullscreen_exit,
+                                    Icons.fullscreen,
                                     size: 35,
                                   )),
                             ],
@@ -1313,7 +1313,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                                             Navigator.of(context).pop();
                                           },
                                           icon: const Icon(
-                                              Icons.close_fullscreen,
+                                              Icons.fullscreen_exit,
                                               size: 30)),
                                     ],
                                   ),
@@ -1385,7 +1385,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                                                         },
                                                         icon: const Icon(
                                                             Icons
-                                                                .close_fullscreen,
+                                                                .fullscreen_exit,
                                                             size: 30)),
                                                   ],
                                                 ),
@@ -1418,7 +1418,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                                           );
                                         },
                                         icon: const Icon(
-                                          Icons.fullscreen_exit,
+                                          Icons.fullscreen,
                                           size: 35,
                                         )),
                                   ],
@@ -1996,22 +1996,6 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                       ],
                     ),
                   ),
-                  Divider(
-                    thickness: 3,
-                    height: 25,
-                    color: Colors.grey[600],
-                  ),
-                  Center(
-                    child: TextButton(
-                      child: const Text(
-                        'Refrence From...',
-                        style: TextStyle(fontSize: 21),
-                      ),
-                      onPressed: () {
-                        launchUrl(_uri);
-                      },
-                    ),
-                  ),
                 ],
               ),
             TextButton(
@@ -2021,6 +2005,22 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                 });
               },
               child: Text(showMore ? 'See Less' : 'See More'),
+            ),
+            Divider(
+              thickness: 3,
+              height: 25,
+              color: Colors.grey[600],
+            ),
+            Center(
+              child: TextButton(
+                child: const Text(
+                  'Refrence From...',
+                  style: TextStyle(fontSize: 21),
+                ),
+                onPressed: () {
+                  launchUrl(_uri);
+                },
+              ),
             ),
           ]),
         ),
