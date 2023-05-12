@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medicalappsproject/home/load_home.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../chat/chatBot.dart';
 import '../diseases_screens/Alzheimer_Detection.dart';
@@ -12,6 +11,7 @@ import '../screens/AboutUs.dart';
 import '../screens/Settings.dart';
 import '../shared/components/components.dart';
 import '../shared/components/costants.dart';
+import 'load_home.dart';
 
 class NewHome extends StatefulWidget {
   const NewHome({super.key});
@@ -23,11 +23,23 @@ class NewHome extends StatefulWidget {
 class _NewHomeState extends State<NewHome> {
   var search = TextEditingController();
   bool _isLoading = true;
+  Future<void> _refresh() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    await Future.delayed(const Duration(seconds: 3));
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         _isLoading = false;
       });
@@ -39,6 +51,28 @@ class _NewHomeState extends State<NewHome> {
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 3, 75, 111),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            CircleAvatar(
+              radius: 16,
+              backgroundImage: AssetImage('asserts/logo3.png'),
+              backgroundColor: Color.fromARGB(215, 7, 125, 180),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              'Medical App',
+              style: TextStyle(
+                  fontSize: 23,
+                  color: Color.fromARGB(207, 228, 228, 229),
+                  wordSpacing: 3,
+                  fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
@@ -60,14 +94,51 @@ class _NewHomeState extends State<NewHome> {
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: 'chat',
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Chat(),
-              ));
+        onPressed: () async {
+          await ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              dismissDirection: DismissDirection.horizontal,
+              behavior: SnackBarBehavior.floating,
+              duration: const Duration(seconds: 5),
+              backgroundColor: const Color.fromARGB(217, 51, 25, 129),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              margin: const EdgeInsets.only(
+                bottom: 25,
+                right: 15,
+                left: 15,
+              ),
+              content: Container(
+                height: 25,
+                child: Row(
+                  children: const [
+                    CircleAvatar(
+                      minRadius: 15,
+                      backgroundColor: Colors.white,
+                      child: Text(
+                        '!',
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: Color.fromARGB(255, 16, 0, 63),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      textAlign: TextAlign.left,
+                      'Soon',
+                      style: TextStyle(fontSize: 19),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
         },
-        backgroundColor: const Color.fromARGB(255, 5, 53, 78).withOpacity(0.4),
+        backgroundColor: const Color.fromARGB(255, 5, 53, 78).withOpacity(0.7),
         splashColor: const Color.fromARGB(255, 5, 27, 40),
         foregroundColor: Colors.white,
         child: const Icon(Icons.chat),
@@ -101,9 +172,7 @@ class _NewHomeState extends State<NewHome> {
               leading: const Icon(Icons.account_box_outlined),
               textColor: Colors.black,
               iconColor: Colors.black,
-              onTap: () {
-          
-              },
+              onTap: () {},
             ),
             const Divider(
               thickness: 1,
@@ -157,208 +226,82 @@ class _NewHomeState extends State<NewHome> {
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: _isLoading
-                ? Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      loadingHome(),
-                      SpinKitCircle(
-                        color: Colors.blue,
-                        size: 50.0,
-                      ),
-                    ],
-                  )
-                : Container(),
-          ),
-          Visibility(
-            visible: !_isLoading,
-            child: Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          'Fracture Detection',
-                          style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 320,
-                          width: 270,
-                          child: Column(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromARGB(255, 21, 139, 172),
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const BoneFractureDetection(),
-                                              ));
-                                        },
-                                        child: Container(
-                                          height: 270,
-                                          decoration: const BoxDecoration(
-                                            color: Color.fromARGB(
-                                                255, 21, 139, 172),
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(20),
-                                                topRight: Radius.circular(20)),
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  "asserts/2103214.jpg"),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const BoneFractureDetection(),
-                                              ));
-                                        },
-                                        child: Column(
-                                          children: const [
-                                            Center(
-                                              child: Text(
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                "Bone Fracture Detection",
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Color.fromARGB(
-                                                        255, 255, 255, 255)),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ]),
-                              ),
-                            ],
-                          ),
+      body: RefreshIndicator(
+        onRefresh: () => _refresh(),
+        child: Stack(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: _isLoading
+                  ? Stack(
+                      alignment: Alignment.center,
+                      children: const [
+                        loadingHome(),
+                        SpinKitCircle(
+                          color: Colors.blue,
+                          size: 50.0,
                         ),
                       ],
-                    ),
-                    const Divider(
-                      height: 25,
-                      thickness: 3,
-                      color: Colors.black,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          'Brain Diseases',
-                          style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        ),
+                    )
+                  : Container(),
+            ),
+            Visibility(
+              visible: !_isLoading,
+              child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      NameForEachSection(
+                          nameSection: 'Fracture Detection', textsize: 28),
+                      const SizedBox(
+                        height: 8,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: Container(
-                              height: 320,
-                              child: ListView(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  Container(
-                                    height: 320,
-                                    width: 250,
-                                    decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 21, 139, 172),
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    child: Column(children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                255, 21, 139, 172),
-                                            borderRadius:
-                                                BorderRadius.circular(30)),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const BrainTumorDetection(),
-                                                    ));
-                                              },
-                                              child: Container(
-                                                width: 250,
-                                                height: 270,
-                                                decoration: const BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  20),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  20)),
-                                                  image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "asserts/brain.jpg"),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BoneFractureDetection(),
+                                    ));
+                              },
+                              child: HomeStyleContiner(
+                                  height: 320,
+                                  width: 270,
+                                  nameDisease: "Bone Fracture Detection",
+                                  nameImage: '2103214')),
+                        ],
+                      ),
+                      const Divider(
+                        height: 25,
+                        thickness: 3,
+                        color: Colors.black,
+                      ),
+                      NameForEachSection(
+                          nameSection: 'Brain Diseases', textsize: 28),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              child: Container(
+                                height: 320,
+                                child: ListView(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    GestureDetector(
+                                        onTap: () {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -366,203 +309,104 @@ class _NewHomeState extends State<NewHome> {
                                                     const BrainTumorDetection(),
                                               ));
                                         },
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 8),
-                                          child: Column(
-                                            children: const [
-                                              Text(
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.start,
+                                        child: HomeStyleContiner(
+                                            nameDisease:
                                                 "Brain Tumor Detection",
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  Container(
-                                    height: 320,
-                                    width: 250,
-                                    decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 21, 139, 172),
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    child: Column(children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                255, 21, 139, 172),
-                                            borderRadius:
-                                                BorderRadius.circular(30)),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const AlzheimerDetection(),
-                                                    ));
-                                              },
-                                              child: Container(
-                                                width: 250,
-                                                height: 270,
-                                                decoration: const BoxDecoration(
+                                            nameImage: 'brain')),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    GestureDetector(
+                                        onTap: () async {
+                                          await ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              dismissDirection:
+                                                  DismissDirection.horizontal,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                              duration:
+                                                  const Duration(seconds: 5),
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      217, 51, 25, 129),
+                                              elevation: 0,
+                                              shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  20),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  20)),
-                                                  image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "asserts/images.jpg"),
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                                      BorderRadius.circular(
+                                                          30)),
+                                              margin: const EdgeInsets.only(
+                                                bottom: 200,
+                                                right: 15,
+                                                left: 15,
+                                              ),
+                                              content: Container(
+                                                height: 25,
+                                                child: Row(
+                                                  children: const [
+                                                    CircleAvatar(
+                                                      minRadius: 15,
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      child: Text(
+                                                        '!',
+                                                        style: TextStyle(
+                                                          fontSize: 22,
+                                                          color: Color.fromARGB(
+                                                              255, 16, 0, 63),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      textAlign: TextAlign.left,
+                                                      'Soon',
+                                                      style: TextStyle(
+                                                          fontSize: 19),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const AlzheimerDetection(),
-                                              ));
+                                          );
                                         },
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 8),
-                                          child: Column(
-                                            children: const [
-                                              Text(
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.start,
-                                                "Alzheimer Detection",
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                  ),
-                                ],
+                                        child: HomeStyleContiner(
+                                            nameDisease: "Alzheimer Detection",
+                                            nameImage: 'images')),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const Divider(
-                      height: 25,
-                      thickness: 3,
-                      color: Colors.black,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 8.0),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          'Heart and Respiratory Diseases',
-                          style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        ),
+                        ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
-                            child: Container(
-                              height: 320,
-                              width: 375,
-                              child: ListView(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  Container(
-                                    height: 320,
-                                    width: 250,
-                                    decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 21, 139, 172),
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    child: Column(children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                255, 21, 139, 172),
-                                            borderRadius:
-                                                BorderRadius.circular(30)),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const HeartDiseaseDetection(),
-                                                    ));
-                                              },
-                                              child: Container(
-                                                width: 250,
-                                                height: 270,
-                                                decoration: const BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  20),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  20)),
-                                                  image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "asserts/Heart.jpg"),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
+                      const Divider(
+                        height: 25,
+                        thickness: 3,
+                        color: Colors.black,
+                      ),
+                      NameForEachSection(
+                          nameSection: 'Heart and Respiratory Diseases'),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              child: SizedBox(
+                                height: 320,
+                                width: MediaQuery.of(context).size.width,
+                                child: ListView(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    GestureDetector(
+                                        onTap: () {
                                           Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -570,122 +414,89 @@ class _NewHomeState extends State<NewHome> {
                                                     const HeartDiseaseDetection(),
                                               ));
                                         },
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 8),
-                                          child: Column(
-                                            children: const [
-                                              Text(
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.start,
+                                        child: HomeStyleContiner(
+                                            nameDisease:
                                                 "Heart Disease Detection",
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  Container(
-                                    height: 320,
-                                    width: 250,
-                                    decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 21, 139, 172),
-                                        borderRadius:
-                                            BorderRadius.circular(30)),
-                                    child: Column(children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                255, 21, 139, 172),
-                                            borderRadius:
-                                                BorderRadius.circular(30)),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const PneumoniaDetection(),
-                                                    ));
-                                              },
-                                              child: Container(
-                                                width: 250,
-                                                height: 270,
-                                                decoration: const BoxDecoration(
+                                            nameImage: 'Heart')),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    GestureDetector(
+                                        onTap: () async {
+                                          await ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              dismissDirection:
+                                                  DismissDirection.horizontal,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                              duration:
+                                                  const Duration(seconds: 5),
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                      217, 51, 25, 129),
+                                              elevation: 0,
+                                              shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  20),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  20)),
-                                                  image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "asserts/Pneumonia.jpg"),
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                                      BorderRadius.circular(
+                                                          30)),
+                                              margin: const EdgeInsets.only(
+                                                bottom: 200,
+                                                right: 15,
+                                                left: 15,
+                                              ),
+                                              content: Container(
+                                                height: 25,
+                                                child: Row(
+                                                  children: const [
+                                                    CircleAvatar(
+                                                      minRadius: 15,
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      child: Text(
+                                                        '!',
+                                                        style: TextStyle(
+                                                          fontSize: 22,
+                                                          color: Color.fromARGB(
+                                                              255, 16, 0, 63),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      textAlign: TextAlign.left,
+                                                      'Soon',
+                                                      style: TextStyle(
+                                                          fontSize: 19),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const PneumoniaDetection(),
-                                              ));
+                                          );
                                         },
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 8),
-                                          child: Column(
-                                            children: const [
-                                              Text(
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.start,
-                                                "Pneumonia Detection",
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ]),
-                                  ),
-                                ],
+                                        child: HomeStyleContiner(
+                                            nameDisease: "Pneumonia Detection",
+                                            nameImage: 'Pneumonia')),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

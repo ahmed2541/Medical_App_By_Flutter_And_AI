@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medicalappsproject/home/home.dart';
-import 'package:medicalappsproject/home/home_screen.dart';
-import 'package:medicalappsproject/login/Login_Page.dart';
+
+import '../home/home_screen.dart';
+import '../login/Login_Page.dart';
+
 
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});

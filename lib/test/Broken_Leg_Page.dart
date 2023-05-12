@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import '../home/home.dart';
 
 class BrokenLeg extends StatefulWidget {
   @override

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:medicalappsproject/home/home_screen.dart';
-import 'package:medicalappsproject/screens/Second_Page.dart';
-import '../home/home.dart';
+
+import '../home/home_screen.dart';
+import 'Second_Page.dart';
+
 
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
@@ -34,11 +35,11 @@ class FirstPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                CircleAvatar(
-                  radius: 25,
-                  backgroundImage: AssetImage('asserts/medical5.jpg'),
-                  backgroundColor: Colors.white,
-                ),
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: AssetImage('asserts/logo3.png'),
+              backgroundColor: Color.fromARGB(215, 7, 125, 180),
+            ),
                 SizedBox(
                   width: 10,
                 ),

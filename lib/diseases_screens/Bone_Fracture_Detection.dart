@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../home/home.dart';
 import '../shared/components/components.dart';
 
 class BoneFractureDetection extends StatefulWidget {

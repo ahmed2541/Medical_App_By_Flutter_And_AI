@@ -6,7 +6,6 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 
-import '../home/home.dart';
 import '../results/results.dart';
 import '../shared/components/components.dart';
 

@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class DetectionResult extends StatefulWidget {
   final String result;
@@ -12,7 +10,7 @@ class DetectionResult extends StatefulWidget {
     required this.result,
     required this.image,
   }) : super(key: key);
-
+  
   @override
   State<DetectionResult> createState() => _DetectionResultState();
 }
@@ -23,8 +21,8 @@ class _DetectionResultState extends State<DetectionResult> {
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(Duration(seconds: 5), () {
+    
+    Future.delayed(Duration(seconds: 3), () {
       setState(() {
         _isLoading = false;
       });
@@ -34,22 +32,24 @@ class _DetectionResultState extends State<DetectionResult> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(
-              Icons.arrow_back_ios_sharp,
-              size: 30,
-            ),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_ios_sharp,
+            size: 30,
           ),
-          backgroundColor: const Color.fromARGB(255, 3, 75, 111),
-          title: const Center(
-            child: Text('Detection Lab',
-                style: TextStyle(
-                    fontSize: 29,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(218, 255, 255, 255))),
-          )),
+        ),
+        backgroundColor: const Color.fromARGB(255, 3, 75, 111),
+        title: const Center(
+          child: Text('Detection Lab',
+              style: TextStyle(
+                  fontSize: 29,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(218, 255, 255, 255))),
+        ),
+      ),
       body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Stack(
           children: [
             Container(
@@ -57,8 +57,8 @@ class _DetectionResultState extends State<DetectionResult> {
               height: MediaQuery.of(context).size.height,
               child: _isLoading
                   ? Center(
-                    child: CircularProgressIndicator(color: Colors.blue,)
-                  )
+                      child: CircularProgressIndicator(color: Colors.blue,)
+                    )
                   : Container(),
             ),
             Visibility(

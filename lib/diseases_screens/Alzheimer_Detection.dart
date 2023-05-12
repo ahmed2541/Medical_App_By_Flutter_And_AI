@@ -5,7 +5,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../home/home.dart';
 import '../shared/components/components.dart';
 
 class AlzheimerDetection extends StatefulWidget {

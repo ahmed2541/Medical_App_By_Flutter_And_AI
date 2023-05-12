@@ -298,9 +298,7 @@ class SkeltonTextD extends StatelessWidget {
       height: height,
       width: width,
       padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.black.withOpacity(0.04)),
+color: Colors.black.withOpacity(0.04)
     );
   }
 }
@@ -314,9 +312,7 @@ class SkeltonAdd extends StatelessWidget {
       height: height,
       width: width,
       padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: Colors.black.withOpacity(0.05)),
+color: Colors.black.withOpacity(0.05)
     );
   }
 }

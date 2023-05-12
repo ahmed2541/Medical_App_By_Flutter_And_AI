@@ -1,4 +1,4 @@
-name: medicalappsproject
+name: medical_app
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -39,10 +39,39 @@ dependencies:
   url_launcher: ^6.1.10
   tflite: ^1.1.2
   flutter_spinkit: ^5.2.0
+  tflite_flutter: ^0.9.5
+
+  flutter_native_splash: ^2.2.19
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#42a5f5"
+  image: asseRts/logo2.png
+  android_gravity: fill
+
+  flutter_launcher_icons: "^0.13.1"
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "asserts/logo2.png"
+  min_sdk_android: 33 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "asserts/logo2.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "asserts/logo2.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "asserts/logo2.png"
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

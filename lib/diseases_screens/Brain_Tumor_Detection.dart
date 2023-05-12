@@ -37,7 +37,10 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
         labels: 'asserts/modules/labels_brain_tumour.txt',
         numThreads: 1,
         isAsset: true,
-        useGpuDelegate: false);
+        useGpuDelegate: false,
+        
+        );
+        
     print(output);
   }
 
@@ -59,9 +62,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
 
     print(recogn!.length.toString());
 
-    setState(() {
-      result = '';
-    });
+
 
     recogn.forEach(
       (element) {

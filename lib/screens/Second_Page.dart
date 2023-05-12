@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medicalappsproject/home/home_screen.dart';
-import '../home/home.dart';
+import '../home/home_screen.dart';
 import 'Third_Page.dart';
 
 class SecondPage extends StatelessWidget {
@@ -34,11 +33,11 @@ class SecondPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                CircleAvatar(
-                  radius: 25,
-                  backgroundImage: AssetImage('asserts/medical5.jpg'),
-                  backgroundColor: Colors.white,
-                ),
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: AssetImage('asserts/logo3.png'),
+              backgroundColor: Color.fromARGB(215, 7, 125, 180),
+            ),
                 SizedBox(
                   width: 10,
                 ),

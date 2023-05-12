@@ -50,7 +50,7 @@ Widget defaultElvaButyon({
 //       throw UnimplementedError();
 //     }
 
-Widget HomeStyle({
+Widget newhomestyle({
   double width = 250,
   double heightContainer = 320,
   Color color = const Color.fromARGB(255, 21, 139, 172),
@@ -105,7 +105,7 @@ Widget HomeStyle({
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.start,
                   "${text.toString()}",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: const TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ],
             ),
@@ -118,16 +118,91 @@ Widget TitleTextMessg({
   String text = 'Warring',
 }) =>
     Padding(
-      padding: EdgeInsets.only(left: 87.0),
+      padding: const EdgeInsets.only(left: 87.0),
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
             fontWeight: FontWeight.bold, fontSize: 20, color: Colors.red),
       ),
     );
 
 Widget ContentTextMessg({
-  String text = 'The accuracy is 89% and you must also consult a doctor\nIf the result does not appear, go back and try again',
+  String text =
+      'The accuracy is 90% and you must also consult a doctor\n\nIf the result does not appear, go back and try again.',
 }) =>
-    Text(text);
+    Text(text,style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500),);
 
+Widget HomeStyleContiner({
+  double height = 320,
+  double width = 250,
+  required String nameDisease,
+  required String nameImage,
+}) =>
+    Container(
+      height: height,
+      width: width,
+      child: Column(children: [
+        Container(
+          decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.05),
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: width,
+                height: height-50,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                  image: DecorationImage(
+                    image: AssetImage("asserts/$nameImage.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          width: width,
+          height: 50,
+          decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 21, 139, 172),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20))),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Column(
+              children: [
+                Text(
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                  nameDisease,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 21,
+                      color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ]),
+    );
+
+Widget NameForEachSection({required String nameSection,double textsize=22}) => Padding(
+      padding: EdgeInsets.only(left: 8.0),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Text(
+          nameSection,
+          style: TextStyle(
+              fontSize: textsize, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+      ),
+    );

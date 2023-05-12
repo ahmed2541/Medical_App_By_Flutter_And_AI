@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:medicalappsproject/screens/Third_Page.dart';
-import 'package:medicalappsproject/shared/components/components.dart';
 
-import '../home/home.dart';
+
 import '../home/home_screen.dart';
 
 class LoginPag extends StatefulWidget {
