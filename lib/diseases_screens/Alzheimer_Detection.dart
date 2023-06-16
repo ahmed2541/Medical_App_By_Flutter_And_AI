@@ -118,7 +118,7 @@ class _AlzheimerDetectionState extends State<AlzheimerDetection> {
                   ),
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
-                      image: AssetImage("asserts/images.jpg"),
+                      image: AssetImage("assets/images/images.jpg"),
                       fit: BoxFit.cover)),
             ),
             Padding(

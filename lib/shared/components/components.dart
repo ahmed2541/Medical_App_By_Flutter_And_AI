@@ -85,7 +85,7 @@ Widget newhomestyle({
                         topLeft: Radius.circular(radiusText),
                         topRight: Radius.circular(radiusText)),
                     image: DecorationImage(
-                      image: AssetImage("asserts/$image.jpg"),
+                      image: AssetImage("assets/images/$image.jpg"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -115,7 +115,7 @@ Widget newhomestyle({
     );
 
 Widget TitleTextMessg({
-  String text = 'Warring',
+  String text = 'Warning',
 }) =>
     Padding(
       padding: const EdgeInsets.only(left: 87.0),
@@ -158,7 +158,7 @@ Widget HomeStyleContiner({
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
                   image: DecorationImage(
-                    image: AssetImage("asserts/$nameImage.jpg"),
+                    image: AssetImage("assets/images/$nameImage.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -157,7 +157,7 @@ Widget DetectionBuild(DetectionModel detection) => Container(
                           topRight: Radius.circular(20)),
                       image: DecorationImage(
                         alignment: AlignmentDirectional.topCenter,
-                        image: AssetImage("asserts/${detection.image}"),
+                        image: AssetImage("assets/images/${detection.image}"),
                         fit: BoxFit.cover,
                       ),
                     ),

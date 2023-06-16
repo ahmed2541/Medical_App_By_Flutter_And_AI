@@ -120,7 +120,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                   ),
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
-                      image: AssetImage("asserts/Heart.jpg"),
+                      image: AssetImage("assets/images/Heart.jpg"),
                       fit: BoxFit.contain)),
             ),
             Padding(
@@ -999,7 +999,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                               children: [
                                 const Image(
                                     image: AssetImage(
-                                        'asserts/mcdc7_theheart.jpg'),
+                                        'assets/images/mcdc7_theheart.jpg'),
                                     fit: BoxFit.contain),
                                 IconButton(
                                     onPressed: () {
@@ -1040,7 +1040,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                         alignment: Alignment.topRight,
                         children: [
                           const Image(
-                              image: AssetImage('asserts/mcdc7_theheart.jpg'),
+                              image: AssetImage('assets/images/mcdc7_theheart.jpg'),
                               fit: BoxFit.contain),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1061,7 +1061,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                                             children: [
                                               const Image(
                                                   image: AssetImage(
-                                                      'asserts/mcdc7_theheart.jpg'),
+                                                      'assets/images/mcdc7_theheart.jpg'),
                                                   fit: BoxFit.contain),
                                               IconButton(
                                                   onPressed: () {
@@ -1302,7 +1302,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                                     children: [
                                       const Image(
                                         image: AssetImage(
-                                            'asserts/ds00525_-ds01120_-ds00064_-ds00178_-ds01052_-ds00537_-ds01179_im00642_ww5r236t_jpg.jpg'),
+                                            'assets/images/ds00525_-ds01120_-ds00064_-ds00178_-ds01052_-ds00537_-ds01179_im00642_ww5r236t_jpg.jpg'),
                                         height: 370,
                                         width: 330,
                                         fit: BoxFit.fill,
@@ -1349,7 +1349,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                               children: [
                                 const Image(
                                     image: AssetImage(
-                                        'asserts/ds00525_-ds01120_-ds00064_-ds00178_-ds01052_-ds00537_-ds01179_im00642_ww5r236t_jpg.jpg'),
+                                        'assets/images/ds00525_-ds01120_-ds00064_-ds00178_-ds01052_-ds00537_-ds01179_im00642_ww5r236t_jpg.jpg'),
                                     fit: BoxFit.contain),
                                 Row(
                                   mainAxisAlignment:
@@ -1372,7 +1372,7 @@ class _HeartDiseaseDetectionState extends State<HeartDiseaseDetection> {
                                                   children: [
                                                     const Image(
                                                       image: AssetImage(
-                                                          'asserts/ds00525_-ds01120_-ds00064_-ds00178_-ds01052_-ds00537_-ds01179_im00642_ww5r236t_jpg.jpg'),
+                                                          'assets/images/ds00525_-ds01120_-ds00064_-ds00178_-ds01052_-ds00537_-ds01179_im00642_ww5r236t_jpg.jpg'),
                                                       height: 370,
                                                       width: 330,
                                                       fit: BoxFit.fill,

@@ -35,8 +35,8 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
 
   loadModel() async {
     String? output = await Tflite.loadModel(
-        model: 'asserts/modules/model.tflite',
-        labels: 'asserts/modules/labels.txt',
+        model: 'assets/modules/model.tflite',
+        labels: 'assets/modules/labels.txt',
         numThreads: 1,
         isAsset: true,
         useGpuDelegate: false);
@@ -175,7 +175,7 @@ class _PneumoniaDetectionState extends State<PneumoniaDetection> {
                   ),
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
-                      image: AssetImage("asserts/Pneumonia.jpg"),
+                      image: AssetImage("assets/images/Pneumonia.jpg"),
                       fit: BoxFit.contain)),
             ),
             Padding(

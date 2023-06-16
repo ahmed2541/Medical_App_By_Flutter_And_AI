@@ -11,6 +11,7 @@ import '../screens/AboutUs.dart';
 import '../screens/Settings.dart';
 import '../shared/components/components.dart';
 import '../shared/components/costants.dart';
+import '../test/tesst.dart';
 import 'load_home.dart';
 
 class NewHome extends StatefulWidget {
@@ -28,7 +29,7 @@ class _NewHomeState extends State<NewHome> {
       _isLoading = true;
     });
 
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 2));
 
     setState(() {
       _isLoading = false;
@@ -39,7 +40,7 @@ class _NewHomeState extends State<NewHome> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         _isLoading = false;
       });
@@ -57,7 +58,7 @@ class _NewHomeState extends State<NewHome> {
           children: const [
             CircleAvatar(
               radius: 16,
-              backgroundImage: AssetImage('asserts/logo3.png'),
+              backgroundImage: AssetImage('assets/images/logo3.png'),
               backgroundColor: Color.fromARGB(215, 7, 125, 180),
             ),
             SizedBox(
@@ -99,13 +100,13 @@ class _NewHomeState extends State<NewHome> {
             SnackBar(
               dismissDirection: DismissDirection.horizontal,
               behavior: SnackBarBehavior.floating,
-              duration: const Duration(seconds: 5),
+              duration: const Duration(seconds: 2),
               backgroundColor: const Color.fromARGB(217, 51, 25, 129),
               elevation: 0,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
-              margin: const EdgeInsets.only(
-                bottom: 25,
+              margin: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.3,
                 right: 15,
                 left: 15,
               ),
@@ -223,6 +224,21 @@ class _NewHomeState extends State<NewHome> {
               thickness: 1,
               height: 4,
             ),
+            const Divider(
+              thickness: 3,
+              height: 10,
+            ),
+            ListTile(
+              title: Center(child: const Text("TEST")),
+              textColor: Color.fromARGB(255, 22, 16, 16),
+              onTap: () {
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) =>  ImageClassificationPage(),
+                //     ));
+              },
+            ),
           ],
         ),
       ),
@@ -326,7 +342,7 @@ class _NewHomeState extends State<NewHome> {
                                               behavior:
                                                   SnackBarBehavior.floating,
                                               duration:
-                                                  const Duration(seconds: 5),
+                                                  const Duration(seconds: 2),
                                               backgroundColor:
                                                   const Color.fromARGB(
                                                       217, 51, 25, 129),
@@ -335,8 +351,11 @@ class _NewHomeState extends State<NewHome> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           30)),
-                                              margin: const EdgeInsets.only(
-                                                bottom: 200,
+                                              margin: EdgeInsets.only(
+                                                bottom: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.3,
                                                 right: 15,
                                                 left: 15,
                                               ),
@@ -431,7 +450,7 @@ class _NewHomeState extends State<NewHome> {
                                               behavior:
                                                   SnackBarBehavior.floating,
                                               duration:
-                                                  const Duration(seconds: 5),
+                                                  const Duration(seconds: 2),
                                               backgroundColor:
                                                   const Color.fromARGB(
                                                       217, 51, 25, 129),
@@ -440,8 +459,11 @@ class _NewHomeState extends State<NewHome> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           30)),
-                                              margin: const EdgeInsets.only(
-                                                bottom: 200,
+                                              margin: EdgeInsets.only(
+                                                bottom: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.3,
                                                 right: 15,
                                                 left: 15,
                                               ),

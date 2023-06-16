@@ -3,35 +3,42 @@ import 'package:flutter/material.dart';
 import '../home/home_screen.dart';
 import '../login/Login_Page.dart';
 
-
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 0, 58, 186),
-        body: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.only(top: 10),
-          decoration: const BoxDecoration(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.73,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    Color.fromARGB(255, 0, 58, 186),
+                    Color.fromARGB(255, 160, 166, 179),
+                  ]),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.elliptical(250, 160),
+                    bottomRight: Radius.elliptical(250, 160),
+                  )),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      CircleAvatar(
-                        radius: 150,
-                        backgroundColor: Color.fromARGB(255, 0, 58, 186),
-                        backgroundImage: AssetImage("asserts/third.jpg"),
-                      )
-                    ],
+                  Center(
+                    child: Container(
+                      height: 400,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/images/thri-rm.png"),
+                              fit: BoxFit.contain)),
+                    ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                   const Text(
                     "Go Medical App",
@@ -43,7 +50,20 @@ class ThirdPage extends StatelessWidget {
                   )
                 ],
               ),
-              Column(
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.27,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                    Color.fromARGB(255, 0, 58, 186),
+                    Color.fromARGB(255, 92, 108, 143),
+                  ]),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(150),
+                    topRight: Radius.circular(150),
+                  )),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   MaterialButton(
                     height: 55,
@@ -100,8 +120,8 @@ class ThirdPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ));
   }
 }

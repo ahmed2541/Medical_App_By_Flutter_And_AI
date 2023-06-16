@@ -74,7 +74,7 @@ class _BrokenLegState extends State<BrokenLeg> {
                   ),
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
-                      image: AssetImage("asserts/leg3.jpg"),
+                      image: AssetImage("assets/images/leg3.jpg"),
                       fit: BoxFit.contain)),
             ),
             Padding(

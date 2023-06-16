@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:tflite/tflite.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,15 +17,61 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
   bool showMore = false;
   final Uri _uri = Uri.parse(
       'https://www.pennmedicine.org/for-patients-and-visitors/patient-information/conditions-treated-a-to-z/bone-fractures');
+
+  String result = '';
   File? image;
-  final imagePicker = ImagePicker();
+  late var imagePicker = ImagePicker();
   upoaldImage(ImageSource source) async {
     var pickedImage = await imagePicker.pickImage(source: source);
     if (pickedImage != null) {
       setState(() {
         image = File(pickedImage.path);
+        doImageClassification();
       });
     } else {}
+  }
+
+  loadModel() async {
+    String? output = await Tflite.loadModel(
+        model: 'assets/modules/model_brain_tumour.tflite',
+        labels: 'assets/modules/labels_brain_tumour.txt',
+        numThreads: 1,
+        isAsset: true,
+        useGpuDelegate: false,
+        
+        );
+        
+    print(output);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    imagePicker = ImagePicker();
+    loadModel();
+  }
+
+  doImageClassification() async {
+    var recogn = await Tflite.runModelOnImage(
+        path: image!.path,
+        imageMean: 0.0,
+        imageStd: 255.0,
+        threshold: 0.1,
+        asynch: true,
+        numResults: 2);
+
+    print(recogn!.length.toString());
+
+    String result = '';
+
+    recogn.forEach(
+      (element) {
+        setState(() {
+          print(element.toString());
+          result += element['label'] + '\n';
+        });
+      },
+    );
   }
 
   @override
@@ -118,7 +165,7 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
                   ),
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
-                      image: AssetImage("asserts/2103214.jpg"),
+                      image: AssetImage("assets/images/2103214.jpg"),
                       fit: BoxFit.contain)),
             ),
             Padding(
@@ -215,7 +262,45 @@ class _BoneFractureDetectionState extends State<BoneFractureDetection> {
                       )),
                 ),
                 image == null
-                    ? const Text("")
+                  ? const Text('')
+                  // : Column(
+                  //     children: [
+                  //       const SizedBox(
+                  //         height: 20,
+                  //       ),
+                  //       Padding(
+                  //         padding: const EdgeInsets.all(8.0),
+                  //         child: Container(
+                  //           height: 400,
+                  //           decoration: BoxDecoration(
+                  //               color: const Color.fromARGB(255, 2, 71, 61),
+                  //               borderRadius: BorderRadius.circular(10),
+                  //               border: Border.all(),
+                  //               image: DecorationImage(
+                  //                   image: FileImage(image!))),
+                  //         ),
+                  //       ),
+                  //       const SizedBox(
+                  //         height: 10,
+                  //       ),
+                  //       Padding(
+                  //         padding: const EdgeInsets.all(8.0),
+                  //         child: Container(
+                  //           width: double.infinity,
+                  //           padding: const EdgeInsets.all(10),
+                  //           decoration: BoxDecoration(
+                  //             borderRadius: BorderRadius.circular(20),
+                  //             color: const Color.fromARGB(255, 3, 75, 111),
+                  //           ),
+                  //           child: Text(
+                  //             'Your Result :\n ${result}',
+                  //             style: const TextStyle(
+                  //                 fontSize: 24, color: Colors.white),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ])
+
                     : Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(

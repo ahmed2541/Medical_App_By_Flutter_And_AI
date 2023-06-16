@@ -26,6 +26,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
     if (pickedImage != null) {
       setState(() {
         image = File(pickedImage.path);
+        
         doImageClassification();
       });
     } else {}
@@ -33,14 +34,13 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
 
   loadModel() async {
     String? output = await Tflite.loadModel(
-        model: 'asserts/modules/model_brain_tumour.tflite',
-        labels: 'asserts/modules/labels_brain_tumour.txt',
-        numThreads: 1,
-        isAsset: true,
-        useGpuDelegate: false,
-        
-        );
-        
+      model: 'assets/modules/model_brain_tumour.tflite',
+      labels: 'assets/modules/labels_brain_tumour.txt',
+      numThreads: 1,
+      isAsset: true,
+      useGpuDelegate: false,
+    );
+
     print(output);
   }
 
@@ -55,14 +55,12 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
     var recogn = await Tflite.runModelOnImage(
         path: image!.path,
         imageMean: 0.0,
-        imageStd: 255.0,
-        threshold: 0.1,
+        imageStd: 180.0,
+        threshold: 0.2,
         asynch: true,
-        numResults: 2);
+        numResults: 1);
 
     print(recogn!.length.toString());
-
-
 
     recogn.forEach(
       (element) {
@@ -72,6 +70,9 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
         });
       },
     );
+    setState(() {
+      this.result = result;
+    });
   }
 
   @override
@@ -120,7 +121,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
           await upoaldImage(ImageSource.camera);
           // ignore: use_build_context_synchronously
           image == null
-              ? Text(' select an image')
+              ? Text('')
               : await Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -175,7 +176,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                   ),
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
-                      image: AssetImage("asserts/brain.jpg"),
+                      image: AssetImage("assets/images/brain.jpg"),
                       fit: BoxFit.contain)),
             ),
             Padding(
@@ -256,11 +257,11 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                             });
 
                         await upoaldImage(ImageSource.gallery);
-                       
+
                         image == null
                             ? Text('')
                             // ignore: use_build_context_synchronously
-                            : await Navigator.push(
+                            : Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => DetectionResult(
@@ -377,7 +378,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                               children: [
                                 const Image(
                                     image: AssetImage(
-                                        'asserts/mcdc7_brain_cancer-8col.jpg'),
+                                        'assets/images/mcdc7_brain_cancer-8col.jpg'),
                                     fit: BoxFit.contain),
                                 IconButton(
                                     onPressed: () {
@@ -419,7 +420,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                         children: [
                           const Image(
                               image: AssetImage(
-                                  'asserts/mcdc7_brain_cancer-8col.jpg'),
+                                  'assets/images/mcdc7_brain_cancer-8col.jpg'),
                               fit: BoxFit.contain),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -440,7 +441,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                             children: [
                                               const Image(
                                                   image: AssetImage(
-                                                      'asserts/mcdc7_brain_cancer-8col.jpg'),
+                                                      'assets/images/mcdc7_brain_cancer-8col.jpg'),
                                                   fit: BoxFit.contain),
                                               IconButton(
                                                   onPressed: () {
@@ -636,7 +637,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                         children: [
                                                           const Image(
                                                             image: AssetImage(
-                                                                'asserts/glioblastoma-8col-3802786-002-0.jpg'),
+                                                                'assets/images/glioblastoma-8col-3802786-002-0.jpg'),
                                                             fit: BoxFit.fill,
                                                             height: 250,
                                                           ),
@@ -694,7 +695,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                       ),
                                       const Image(
                                         image: AssetImage(
-                                            'asserts/glioblastoma-8col-3802786-002-0.jpg'),
+                                            'assets/images/glioblastoma-8col-3802786-002-0.jpg'),
                                         fit: BoxFit.fill,
                                         height: 190,
                                       ),
@@ -757,7 +758,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                         children: [
                                                           const Image(
                                                             image: AssetImage(
-                                                                'asserts/medulloblastoma-8col-3802786-003-0.jpg'),
+                                                                'assets/images/medulloblastoma-8col-3802786-003-0.jpg'),
                                                             fit: BoxFit.fill,
                                                             width: 300,
                                                             height: 300,
@@ -816,7 +817,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                       ),
                                       const Image(
                                         image: AssetImage(
-                                            'asserts/medulloblastoma-8col-3802786-003-0.jpg'),
+                                            'assets/images/medulloblastoma-8col-3802786-003-0.jpg'),
                                         fit: BoxFit.fill,
                                         height: 190,
                                       ),
@@ -879,7 +880,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                         children: [
                                                           const Image(
                                                             image: AssetImage(
-                                                                'asserts/ans7_acousticneuroma-8col.jpg'),
+                                                                'assets/images/ans7_acousticneuroma-8col.jpg'),
                                                             fit: BoxFit.fill,
                                                             width: 300,
                                                             height: 370,
@@ -938,7 +939,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                       ),
                                       const Image(
                                         image: AssetImage(
-                                            'asserts/ans7_acousticneuroma-8col.jpg'),
+                                            'assets/images/ans7_acousticneuroma-8col.jpg'),
                                         fit: BoxFit.fill,
                                         height: 250,
                                       ),
@@ -1320,7 +1321,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                     children: [
                                       const Image(
                                           image: AssetImage(
-                                              'asserts/mcdc7_brain_cancer-8col.jpg'),
+                                              'assets/images/mcdc7_brain_cancer-8col.jpg'),
                                           fit: BoxFit.contain),
                                       IconButton(
                                           onPressed: () {
@@ -1366,7 +1367,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                   padding: EdgeInsets.only(top: 15.0),
                                   child: Image(
                                       image: AssetImage(
-                                          'asserts/ds00266_ds00810_im03440_bn7_lobesthu_jpg.jpg'),
+                                          'assets/images/ds00266_ds00810_im03440_bn7_lobesthu_jpg.jpg'),
                                       fit: BoxFit.contain),
                                 ),
                                 Row(
@@ -1390,7 +1391,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                   children: [
                                                     const Image(
                                                       image: AssetImage(
-                                                          'asserts/ds00266_ds00810_im03440_bn7_lobesthu_jpg.jpg'),
+                                                          'assets/images/ds00266_ds00810_im03440_bn7_lobesthu_jpg.jpg'),
                                                       fit: BoxFit.fill,
                                                       height: 370,
                                                     ),
@@ -1588,7 +1589,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                     children: [
                                       const Image(
                                           image: AssetImage(
-                                              'asserts/mcdc7_brain_cancer-8col.jpg'),
+                                              'assets/images/mcdc7_brain_cancer-8col.jpg'),
                                           fit: BoxFit.contain),
                                       IconButton(
                                           onPressed: () {
@@ -1632,7 +1633,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                               children: [
                                 const Image(
                                     image: AssetImage(
-                                        'asserts/brain-metastases-8col.jpg'),
+                                        'assets/images/brain-metastases-8col.jpg'),
                                     fit: BoxFit.contain),
                                 Row(
                                   mainAxisAlignment:
@@ -1655,7 +1656,7 @@ class _BrainTumorDetectionState extends State<BrainTumorDetection> {
                                                   children: [
                                                     const Image(
                                                       image: AssetImage(
-                                                          'asserts/brain-metastases-8col.jpg'),
+                                                          'assets/images/brain-metastases-8col.jpg'),
                                                       fit: BoxFit.fill,
                                                       height: 350,
                                                     ),
