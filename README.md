@@ -15,15 +15,3 @@ Refrences:
 
 
 
-
-Some Erorrs And Sol :
-    ---1------
-    - يجب تعديل ملف build.gradle للمكون الإضافي tflite في المسار C:\Users\hp\AppData\Local\Pub\Cache\hosted\pub.dev\tflite-1.1.2\android\build.gradle، وذلك بتغيير الكلمة compile إلى implementation في جملة الاعتماديات (dependencies) كما يلي:
-
-```
-dependencies {
-    implementation 'org.tensorflow:tensorflow-lite:+'
-    implementation 'org.tensorflow:tensorflow-lite-gpu:+'
-}
-```
-
